@@ -21,6 +21,14 @@ public abstract class Exchange {
                 Boolean.getBoolean((String) userConfig.map().getOrDefault("testnet", "false"));
     }
 
+    public boolean isSandboxModeEnabled() {
+        return isSandboxModeEnabled;
+    }
+
+    public JsonNode getDescribe() {
+        return describe;
+    }
+
     // private void initHttpClient() {}
 
     // private void transformApiNew(Map<String, Object> api, List<String> paths = List.of([])) {}
