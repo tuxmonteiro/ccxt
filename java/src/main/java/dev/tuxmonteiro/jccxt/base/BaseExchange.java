@@ -3,18 +3,18 @@ package dev.tuxmonteiro.jccxt.base;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 
-public abstract class Exchange {
+public abstract class BaseExchange {
 
     protected final ObjectMapper mapper = new ObjectMapper();
 
     private final boolean isSandboxModeEnabled;
     private final JsonNode describe;
 
-    public Exchange() {
+    public BaseExchange() {
         this(UserConfig.DEFAULT, new ObjectMapper().nullNode());
     }
 
-    public Exchange(final UserConfig userConfig, JsonNode describe) {
+    public BaseExchange(final UserConfig userConfig, JsonNode describe) {
         this.describe = describe;
         this.isSandboxModeEnabled =
                 Boolean.getBoolean((String) userConfig.map().getOrDefault("sandbox", "false")) ||
