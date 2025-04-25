@@ -1,0 +1,69 @@
+{
+  "$ref": "#/definitions/FundingRate",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "FundingRate": {
+      "additionalProperties": false,
+      "properties": {
+        "datetime": {
+          "type": "string"
+        },
+        "estimatedSettlePrice": {
+          "type": "number"
+        },
+        "fundingDatetime": {
+          "type": "string"
+        },
+        "fundingRate": {
+          "type": "number"
+        },
+        "fundingTimestamp": {
+          "type": "number"
+        },
+        "indexPrice": {
+          "type": "number"
+        },
+        "info": {},
+        "interestRate": {
+          "type": "number"
+        },
+        "interval": {
+          "type": "string"
+        },
+        "markPrice": {
+          "type": "number"
+        },
+        "nextFundingDatetime": {
+          "type": "string"
+        },
+        "nextFundingRate": {
+          "type": "number"
+        },
+        "nextFundingTimestamp": {
+          "type": "number"
+        },
+        "previousFundingDatetime": {
+          "type": "string"
+        },
+        "previousFundingRate": {
+          "type": "number"
+        },
+        "previousFundingTimestamp": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "symbol",
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

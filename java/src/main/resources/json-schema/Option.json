@@ -1,0 +1,79 @@
+{
+  "$ref": "#/definitions/Option",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Option": {
+      "additionalProperties": false,
+      "properties": {
+        "askPrice": {
+          "type": "number"
+        },
+        "baseVolume": {
+          "type": "number"
+        },
+        "bidPrice": {
+          "type": "number"
+        },
+        "change": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "impliedVolatility": {
+          "type": "number"
+        },
+        "info": {},
+        "lastPrice": {
+          "type": "number"
+        },
+        "markPrice": {
+          "type": "number"
+        },
+        "midPrice": {
+          "type": "number"
+        },
+        "openInterest": {
+          "type": "number"
+        },
+        "percentage": {
+          "type": "number"
+        },
+        "quoteVolume": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "underlyingPrice": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "info",
+        "currency",
+        "symbol",
+        "impliedVolatility",
+        "openInterest",
+        "bidPrice",
+        "askPrice",
+        "midPrice",
+        "markPrice",
+        "lastPrice",
+        "underlyingPrice",
+        "change",
+        "percentage",
+        "baseVolume",
+        "quoteVolume"
+      ],
+      "type": "object"
+    }
+  }
+}
+

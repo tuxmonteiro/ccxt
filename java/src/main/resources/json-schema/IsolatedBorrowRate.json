@@ -1,0 +1,46 @@
+{
+  "$ref": "#/definitions/IsolatedBorrowRate",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "IsolatedBorrowRate": {
+      "additionalProperties": false,
+      "properties": {
+        "base": {
+          "type": "string"
+        },
+        "baseRate": {
+          "type": "number"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "info": {},
+        "period": {
+          "type": "number"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "quoteRate": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "info",
+        "symbol",
+        "base",
+        "baseRate",
+        "quote",
+        "quoteRate"
+      ],
+      "type": "object"
+    }
+  }
+}
+

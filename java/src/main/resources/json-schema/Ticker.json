@@ -1,0 +1,81 @@
+{
+  "$ref": "#/definitions/Ticker",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Ticker": {
+      "additionalProperties": false,
+      "properties": {
+        "ask": {
+          "type": "number"
+        },
+        "askVolume": {
+          "type": "number"
+        },
+        "average": {
+          "type": "number"
+        },
+        "baseVolume": {
+          "type": "number"
+        },
+        "bid": {
+          "type": "number"
+        },
+        "bidVolume": {
+          "type": "number"
+        },
+        "change": {
+          "type": "number"
+        },
+        "close": {
+          "type": "number"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "high": {
+          "type": "number"
+        },
+        "indexPrice": {
+          "type": "number"
+        },
+        "info": {},
+        "last": {
+          "type": "number"
+        },
+        "low": {
+          "type": "number"
+        },
+        "markPrice": {
+          "type": "number"
+        },
+        "open": {
+          "type": "number"
+        },
+        "percentage": {
+          "type": "number"
+        },
+        "previousClose": {
+          "type": "number"
+        },
+        "quoteVolume": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "vwap": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "symbol",
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

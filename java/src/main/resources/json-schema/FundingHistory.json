@@ -1,0 +1,39 @@
+{
+  "$ref": "#/definitions/FundingHistory",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "FundingHistory": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "code": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "info",
+        "symbol",
+        "code",
+        "id",
+        "amount"
+      ],
+      "type": "object"
+    }
+  }
+}
+

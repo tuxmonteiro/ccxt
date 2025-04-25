@@ -1,0 +1,99 @@
+{
+  "$ref": "#/definitions/Currency",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Currency": {
+      "additionalProperties": false,
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "code": {
+          "type": "string"
+        },
+        "deposit": {
+          "type": "boolean"
+        },
+        "fee": {
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "limits": {
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "additionalProperties": false,
+              "properties": {
+                "max": {
+                  "type": "number"
+                },
+                "min": {
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            },
+            "withdraw": {
+              "additionalProperties": false,
+              "properties": {
+                "max": {
+                  "type": "number"
+                },
+                "min": {
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "amount",
+            "withdraw"
+          ],
+          "type": "object"
+        },
+        "margin": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networks": {
+          "additionalProperties": false,
+          "properties": {
+            "string": {}
+          },
+          "required": [
+            "string"
+          ],
+          "type": "object"
+        },
+        "numericId": {
+          "type": "number"
+        },
+        "precision": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        },
+        "withdraw": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "code",
+        "precision",
+        "limits",
+        "networks",
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

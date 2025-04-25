@@ -1,0 +1,31 @@
+{
+  "$ref": "#/definitions/FundingRateHistory",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "FundingRateHistory": {
+      "additionalProperties": false,
+      "properties": {
+        "datetime": {
+          "type": "string"
+        },
+        "fundingRate": {
+          "type": "number"
+        },
+        "info": {},
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "info",
+        "symbol",
+        "fundingRate"
+      ],
+      "type": "object"
+    }
+  }
+}
+

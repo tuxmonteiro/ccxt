@@ -1,0 +1,26 @@
+{
+  "$ref": "#/definitions/Account",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Account": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

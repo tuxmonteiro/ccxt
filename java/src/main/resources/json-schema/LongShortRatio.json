@@ -1,0 +1,34 @@
+{
+  "$ref": "#/definitions/LongShortRatio",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "LongShortRatio": {
+      "additionalProperties": false,
+      "properties": {
+        "datetime": {
+          "type": "string"
+        },
+        "info": {},
+        "longShortRatio": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "timeframe": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "info",
+        "symbol",
+        "longShortRatio"
+      ],
+      "type": "object"
+    }
+  }
+}
+

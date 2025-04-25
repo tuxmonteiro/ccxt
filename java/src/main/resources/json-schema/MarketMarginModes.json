@@ -1,0 +1,23 @@
+{
+  "$ref": "#/definitions/MarketMarginModes",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "MarketMarginModes": {
+      "additionalProperties": false,
+      "properties": {
+        "cross": {
+          "type": "boolean"
+        },
+        "isolated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "isolated",
+        "cross"
+      ],
+      "type": "object"
+    }
+  }
+}
+

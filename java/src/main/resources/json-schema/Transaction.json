@@ -1,0 +1,125 @@
+{
+  "$ref": "#/definitions/Transaction",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Fee": {
+      "additionalProperties": false,
+      "properties": {
+        "cost": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "Str": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "not": {}
+        }
+      ]
+    },
+    "Transaction": {
+      "additionalProperties": false,
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "addressFrom": {
+          "type": "string"
+        },
+        "addressTo": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "fee": {
+          "$ref": "#/definitions/Fee"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "internal": {
+          "type": "boolean"
+        },
+        "network": {
+          "type": "string"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "pending",
+              "type": "string"
+            },
+            {
+              "const": "ok",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "tag": {
+          "type": "string"
+        },
+        "tagFrom": {
+          "type": "string"
+        },
+        "tagTo": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "txid": {
+          "type": "string"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "const": "deposit",
+              "type": "string"
+            },
+            {
+              "const": "withdrawal",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "updated": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "info",
+        "type",
+        "status"
+      ],
+      "type": "object"
+    }
+  }
+}
+

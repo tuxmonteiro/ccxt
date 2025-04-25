@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/WithdrawalResponse",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "WithdrawalResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "info": {}
+      },
+      "required": [
+        "info",
+        "id"
+      ],
+      "type": "object"
+    }
+  }
+}
+

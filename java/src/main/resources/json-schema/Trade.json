@@ -1,0 +1,105 @@
+{
+  "$ref": "#/definitions/Trade",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Fee": {
+      "additionalProperties": false,
+      "properties": {
+        "cost": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "Str": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "not": {}
+        }
+      ]
+    },
+    "Trade": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "cost": {
+          "type": "number"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "fee": {
+          "$ref": "#/definitions/Fee"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "order": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "side": {
+          "anyOf": [
+            {
+              "const": "buy",
+              "type": "string"
+            },
+            {
+              "const": "sell",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "takerOrMaker": {
+          "anyOf": [
+            {
+              "const": "taker",
+              "type": "string"
+            },
+            {
+              "const": "maker",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "info",
+        "price",
+        "side",
+        "takerOrMaker"
+      ],
+      "type": "object"
+    }
+  }
+}
+

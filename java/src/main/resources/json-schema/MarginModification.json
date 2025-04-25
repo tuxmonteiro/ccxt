@@ -1,0 +1,54 @@
+{
+  "$ref": "#/definitions/MarginModification",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "MarginModification": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "code": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "info": {},
+        "marginMode": {
+          "enum": [
+            "cross",
+            "isolated"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "type": {
+          "enum": [
+            "add",
+            "reduce",
+            "set"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "info",
+        "symbol"
+      ],
+      "type": "object"
+    }
+  }
+}
+

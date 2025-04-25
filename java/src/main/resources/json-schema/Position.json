@@ -1,0 +1,99 @@
+{
+  "$ref": "#/definitions/Position",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Position": {
+      "additionalProperties": false,
+      "properties": {
+        "collateral": {
+          "type": "number"
+        },
+        "contractSize": {
+          "type": "number"
+        },
+        "contracts": {
+          "type": "number"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "entryPrice": {
+          "type": "number"
+        },
+        "hedged": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "initialMargin": {
+          "type": "number"
+        },
+        "initialMarginPercentage": {
+          "type": "number"
+        },
+        "lastPrice": {
+          "type": "number"
+        },
+        "lastUpdateTimestamp": {
+          "type": "number"
+        },
+        "leverage": {
+          "type": "number"
+        },
+        "liquidationPrice": {
+          "type": "number"
+        },
+        "maintenanceMargin": {
+          "type": "number"
+        },
+        "maintenanceMarginPercentage": {
+          "type": "number"
+        },
+        "marginMode": {
+          "type": "string"
+        },
+        "marginRatio": {
+          "type": "number"
+        },
+        "markPrice": {
+          "type": "number"
+        },
+        "notional": {
+          "type": "number"
+        },
+        "percentage": {
+          "type": "number"
+        },
+        "realizedPnl": {
+          "type": "number"
+        },
+        "side": {
+          "type": "string"
+        },
+        "stopLossPrice": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "takeProfitPrice": {
+          "type": "number"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "unrealizedPnl": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "symbol",
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

@@ -1,0 +1,74 @@
+{
+  "$ref": "#/definitions/LedgerEntry",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Fee": {
+      "additionalProperties": false,
+      "properties": {
+        "cost": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "LedgerEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "after": {
+          "type": "number"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "before": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string"
+        },
+        "fee": {
+          "$ref": "#/definitions/Fee"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "referenceAccount": {
+          "type": "string"
+        },
+        "referenceId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

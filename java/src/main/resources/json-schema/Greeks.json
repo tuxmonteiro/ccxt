@@ -1,0 +1,87 @@
+{
+  "$ref": "#/definitions/Greeks",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Greeks": {
+      "additionalProperties": false,
+      "properties": {
+        "askImpliedVolatility": {
+          "type": "number"
+        },
+        "askPrice": {
+          "type": "number"
+        },
+        "askSize": {
+          "type": "number"
+        },
+        "bidImpliedVolatility": {
+          "type": "number"
+        },
+        "bidPrice": {
+          "type": "number"
+        },
+        "bidSize": {
+          "type": "number"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "delta": {
+          "type": "number"
+        },
+        "gamma": {
+          "type": "number"
+        },
+        "info": {},
+        "lastPrice": {
+          "type": "number"
+        },
+        "markImpliedVolatility": {
+          "type": "number"
+        },
+        "markPrice": {
+          "type": "number"
+        },
+        "rho": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "theta": {
+          "type": "number"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "underlyingPrice": {
+          "type": "number"
+        },
+        "vega": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "symbol",
+        "delta",
+        "gamma",
+        "theta",
+        "vega",
+        "rho",
+        "bidSize",
+        "askSize",
+        "bidImpliedVolatility",
+        "askImpliedVolatility",
+        "markImpliedVolatility",
+        "bidPrice",
+        "askPrice",
+        "markPrice",
+        "lastPrice",
+        "underlyingPrice",
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

@@ -1,0 +1,37 @@
+{
+  "$ref": "#/definitions/LastPrice",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "LastPrice": {
+      "additionalProperties": false,
+      "properties": {
+        "datetime": {
+          "type": "string"
+        },
+        "info": {},
+        "price": {
+          "type": "number"
+        },
+        "side": {
+          "$ref": "#/definitions/OrderSide"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "symbol",
+        "price",
+        "info"
+      ],
+      "type": "object"
+    },
+    "OrderSide": {
+      "type": "string"
+    }
+  }
+}
+

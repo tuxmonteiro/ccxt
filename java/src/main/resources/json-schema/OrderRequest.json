@@ -1,0 +1,40 @@
+{
+  "$ref": "#/definitions/OrderRequest",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "OrderRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "params": {},
+        "price": {
+          "type": "number"
+        },
+        "side": {
+          "$ref": "#/definitions/OrderSide"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/OrderType"
+        }
+      },
+      "required": [
+        "symbol",
+        "type",
+        "side"
+      ],
+      "type": "object"
+    },
+    "OrderSide": {
+      "type": "string"
+    },
+    "OrderType": {
+      "type": "string"
+    }
+  }
+}
+

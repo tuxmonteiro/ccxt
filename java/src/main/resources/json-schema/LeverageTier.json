@@ -1,0 +1,38 @@
+{
+  "$ref": "#/definitions/LeverageTier",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "LeverageTier": {
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "info": {},
+        "maintenanceMarginRate": {
+          "type": "number"
+        },
+        "maxLeverage": {
+          "type": "number"
+        },
+        "maxNotional": {
+          "type": "number"
+        },
+        "minNotional": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

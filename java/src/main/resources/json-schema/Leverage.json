@@ -1,0 +1,55 @@
+{
+  "$ref": "#/definitions/Leverage",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Leverage": {
+      "additionalProperties": false,
+      "properties": {
+        "info": {},
+        "longLeverage": {
+          "type": "number"
+        },
+        "marginMode": {
+          "anyOf": [
+            {
+              "const": "isolated",
+              "type": "string"
+            },
+            {
+              "const": "cross",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "shortLeverage": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "info",
+        "symbol",
+        "marginMode",
+        "longLeverage",
+        "shortLeverage"
+      ],
+      "type": "object"
+    },
+    "Str": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "not": {}
+        }
+      ]
+    }
+  }
+}
+

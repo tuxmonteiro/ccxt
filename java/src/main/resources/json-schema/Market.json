@@ -1,0 +1,215 @@
+{
+  "$ref": "#/definitions/Market",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Market": {
+      "additionalProperties": false,
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "base": {
+          "type": "string"
+        },
+        "baseId": {
+          "type": "string"
+        },
+        "contract": {
+          "type": "boolean"
+        },
+        "contractSize": {
+          "type": "number"
+        },
+        "created": {
+          "type": "number"
+        },
+        "expiry": {
+          "type": "number"
+        },
+        "expiryDatetime": {
+          "type": "string"
+        },
+        "feeSide": {
+          "type": "string"
+        },
+        "future": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "inverse": {
+          "type": "boolean"
+        },
+        "limits": {
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "$ref": "#/definitions/MinMax"
+            },
+            "cost": {
+              "$ref": "#/definitions/MinMax"
+            },
+            "leverage": {
+              "$ref": "#/definitions/MinMax"
+            },
+            "market": {
+              "$ref": "#/definitions/MinMax"
+            },
+            "price": {
+              "$ref": "#/definitions/MinMax"
+            }
+          },
+          "type": "object"
+        },
+        "linear": {
+          "type": "boolean"
+        },
+        "lowercaseId": {
+          "type": "string"
+        },
+        "maker": {
+          "type": "number"
+        },
+        "margin": {
+          "type": "boolean"
+        },
+        "marginModes": {
+          "$ref": "#/definitions/MarketMarginModes"
+        },
+        "numericId": {
+          "type": "number"
+        },
+        "option": {
+          "type": "boolean"
+        },
+        "optionType": {
+          "type": "string"
+        },
+        "percentage": {
+          "type": "boolean"
+        },
+        "precision": {
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "type": "number"
+            },
+            "cost": {
+              "type": "number"
+            },
+            "price": {
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "quanto": {
+          "type": "boolean"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "quoteId": {
+          "type": "string"
+        },
+        "settle": {
+          "type": "string"
+        },
+        "settleId": {
+          "type": "string"
+        },
+        "spot": {
+          "type": "boolean"
+        },
+        "strike": {
+          "type": "number"
+        },
+        "subType": {
+          "enum": [
+            "linear",
+            "inverse"
+          ],
+          "type": "string"
+        },
+        "swap": {
+          "type": "boolean"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "taker": {
+          "type": "number"
+        },
+        "tierBased": {
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/MarketType"
+        },
+        "uppercaseId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "symbol",
+        "base",
+        "quote",
+        "type",
+        "spot",
+        "margin",
+        "swap",
+        "future",
+        "option",
+        "contract",
+        "precision",
+        "limits",
+        "info"
+      ],
+      "type": "object"
+    },
+    "MarketMarginModes": {
+      "additionalProperties": false,
+      "properties": {
+        "cross": {
+          "type": "boolean"
+        },
+        "isolated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "isolated",
+        "cross"
+      ],
+      "type": "object"
+    },
+    "MarketType": {
+      "enum": [
+        "spot",
+        "margin",
+        "swap",
+        "future",
+        "option",
+        "delivery",
+        "index"
+      ],
+      "type": "string"
+    },
+    "MinMax": {
+      "additionalProperties": false,
+      "description": "Request parameters",
+      "properties": {
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  }
+}
+

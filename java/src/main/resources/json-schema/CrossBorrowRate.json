@@ -1,0 +1,33 @@
+{
+  "$ref": "#/definitions/CrossBorrowRate",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CrossBorrowRate": {
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "info": {},
+        "period": {
+          "type": "number"
+        },
+        "rate": {
+          "type": "number"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "info",
+        "rate"
+      ],
+      "type": "object"
+    }
+  }
+}
+

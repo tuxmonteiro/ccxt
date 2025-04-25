@@ -1,0 +1,39 @@
+{
+  "$ref": "#/definitions/OpenInterest",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "OpenInterest": {
+      "additionalProperties": false,
+      "properties": {
+        "baseVolume": {
+          "type": "number"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "info": {},
+        "openInterestAmount": {
+          "type": "number"
+        },
+        "openInterestValue": {
+          "type": "number"
+        },
+        "quoteVolume": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "symbol",
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

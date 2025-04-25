@@ -1,0 +1,47 @@
+{
+  "$ref": "#/definitions/DepositWithdrawFee",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "DepositWithdrawFee": {
+      "additionalProperties": false,
+      "properties": {
+        "deposit": {
+          "$ref": "#/definitions/DepositWithdrawFeeNetwork"
+        },
+        "info": {},
+        "networks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DepositWithdrawFeeNetwork"
+          }
+        },
+        "withdraw": {
+          "$ref": "#/definitions/DepositWithdrawFeeNetwork"
+        }
+      },
+      "required": [
+        "info"
+      ],
+      "type": "object"
+    },
+    "DepositWithdrawFeeNetwork": {
+      "additionalProperties": false,
+      "properties": {
+        "fee": {
+          "type": "number"
+        },
+        "percentage": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "Dictionary<DepositWithdrawFeeNetwork>": {
+      "additionalProperties": {
+        "$ref": "#/definitions/DepositWithdrawFeeNetwork"
+      },
+      "type": "object"
+    }
+  }
+}
+

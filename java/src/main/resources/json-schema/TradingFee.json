@@ -1,0 +1,32 @@
+{
+  "$ref": "#/definitions/TradingFee",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "TradingFee": {
+      "additionalProperties": false,
+      "properties": {
+        "info": {},
+        "maker": {
+          "type": "number"
+        },
+        "percentage": {
+          "type": "boolean"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "taker": {
+          "type": "number"
+        },
+        "tierBased": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "info"
+      ],
+      "type": "object"
+    }
+  }
+}
+

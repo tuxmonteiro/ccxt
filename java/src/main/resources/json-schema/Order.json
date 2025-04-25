@@ -1,0 +1,234 @@
+{
+  "$ref": "#/definitions/Order",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Fee": {
+      "additionalProperties": false,
+      "properties": {
+        "cost": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "Order": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "average": {
+          "type": "number"
+        },
+        "clientOrderId": {
+          "type": "string"
+        },
+        "cost": {
+          "type": "number"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "fee": {
+          "$ref": "#/definitions/Fee"
+        },
+        "filled": {
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "lastTradeTimestamp": {
+          "type": "number"
+        },
+        "lastUpdateTimestamp": {
+          "type": "number"
+        },
+        "postOnly": {
+          "type": "boolean"
+        },
+        "price": {
+          "type": "number"
+        },
+        "reduceOnly": {
+          "type": "boolean"
+        },
+        "remaining": {
+          "type": "number"
+        },
+        "side": {
+          "anyOf": [
+            {
+              "const": "buy",
+              "type": "string"
+            },
+            {
+              "const": "sell",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "open",
+              "type": "string"
+            },
+            {
+              "const": "closed",
+              "type": "string"
+            },
+            {
+              "const": "canceled",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "stopLossPrice": {
+          "type": "number"
+        },
+        "stopPrice": {
+          "type": "number"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "takeProfitPrice": {
+          "type": "number"
+        },
+        "timeInForce": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "trades": {
+          "items": {
+            "$ref": "#/definitions/Trade"
+          },
+          "type": "array"
+        },
+        "triggerPrice": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "datetime",
+        "timestamp",
+        "lastTradeTimestamp",
+        "status",
+        "symbol",
+        "side",
+        "price",
+        "amount",
+        "filled",
+        "remaining",
+        "cost",
+        "trades",
+        "info"
+      ],
+      "type": "object"
+    },
+    "Str": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "not": {}
+        }
+      ]
+    },
+    "Trade": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "cost": {
+          "type": "number"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "fee": {
+          "$ref": "#/definitions/Fee"
+        },
+        "id": {
+          "type": "string"
+        },
+        "info": {},
+        "order": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "side": {
+          "anyOf": [
+            {
+              "const": "buy",
+              "type": "string"
+            },
+            {
+              "const": "sell",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "takerOrMaker": {
+          "anyOf": [
+            {
+              "const": "taker",
+              "type": "string"
+            },
+            {
+              "const": "maker",
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/Str"
+            }
+          ]
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "info",
+        "price",
+        "side",
+        "takerOrMaker"
+      ],
+      "type": "object"
+    }
+  }
+}
+
