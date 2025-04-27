@@ -10,10 +10,7 @@
         },
         "info": {},
         "networks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DepositWithdrawFeeNetwork"
-          }
+          "type":"array","items":{"$ref":"#/definitions/DepositWithdrawFeeNetwork"}
         },
         "withdraw": {
           "$ref": "#/definitions/DepositWithdrawFeeNetwork"
