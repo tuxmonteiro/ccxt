@@ -6,7 +6,7 @@ JSON_DIR="../../../../../../resources/json-schema/"
 grep 'export interface' types.ts | grep -v Dictionary | awk '{ print $3 }' | while read class; do
   echo $class
   # npm install --save ts-json-schema-generator
-  #npx ts-json-schema-generator --path types.ts --type $class > $JSON_DIR/${class%Interface}.json
+  npx ts-json-schema-generator --path types.ts --type $class > $JSON_DIR/${class%Interface}.json
   sed -i 's/Interface//g' $JSON_DIR/${class%Interface}.json
 done
 
