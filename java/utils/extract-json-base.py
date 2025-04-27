@@ -27,7 +27,7 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
     'chrome100': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36'
   }
 
-  with open(ts_source) as f:
+  with open(ts_source, encoding='utf-8') as f:
     count = 0
     begin = re.compile(begin_str)
     open_brace = re.compile('{')
@@ -106,9 +106,8 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
     json_dict = json.loads(jsonp)
   except:
     log.error(jsonp)
-    #print(jsonp)
-  finally:
-    return json_dict
+
+  return json_dict
 
 ts_base_path = '../../ts'
 if len(sys.argv) > 1:
