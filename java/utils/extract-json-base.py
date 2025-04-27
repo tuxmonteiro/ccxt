@@ -133,5 +133,5 @@ for exchange_file in glob.glob(f'{ts_base_path}/src/*.ts'):
     exchange = recursive_merge(exchange_base, exchange_def)
     exchanges.append(exchange)
 
-print(json.dumps(exchanges, indent=2))
+print(json.dumps(exchanges, indent=4, sort_keys=True, ensure_ascii=False))
 
