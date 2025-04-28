@@ -1,3 +1,9 @@
+"""
+  extract exchanges metadata from ts files and create json data
+"""
+
+# pylint: disable=line-too-long, bare-except, invalid-name
+
 import re
 import json
 import sys
@@ -6,7 +12,11 @@ import logging as log
 
 log.basicConfig(filename='app.log', level=log.DEBUG)
 
-def recursive_merge(dict1, dict2):
+def recursive_merge(dict1, dict2) -> any:
+    """
+    Recursively merge two dictionaries.
+    """
+
     base = dict1.copy()
     for key, value in dict2.items():
         if key in dict1 and isinstance(base[key], dict) and isinstance(value, dict):
@@ -18,6 +28,9 @@ def recursive_merge(dict1, dict2):
     return base
 
 def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> str:
+  """
+  extract json from ts file
+  """
   extracted = []
   jsonp = "{}"
   json_dict = {}
@@ -132,4 +145,3 @@ for exchange_file in glob.glob(f'{ts_base_path}/src/*.ts'):
     exchanges.append(exchange)
 
 print(json.dumps(exchanges, indent=4, sort_keys=True, ensure_ascii=False))
-
