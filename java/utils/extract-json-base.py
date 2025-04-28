@@ -9,8 +9,11 @@ import json
 import sys
 import glob
 import logging as log
+from tempfile import TemporaryDirectory
 
-log.basicConfig(filename='app.log', level=log.DEBUG)
+
+temp_dir = TemporaryDirectory()
+log.basicConfig(filename=f'{temp_dir.name}/app.log', level=log.DEBUG)
 
 
 def recursive_merge(dict1, dict2) -> any:
@@ -51,7 +54,7 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
         open_brace = re.compile('{')
         close_brace = re.compile('}')
         ignore_return = re.compile('return {')
-        ignore_undefined = re.compile(': undefined')
+        ignore_undefined = re.compile(r': (undefined|{[ ]?})')
         eval_re = re.compile(eval_re_str)
         for line in f.readlines():
             if begin.search(line) is not None:
@@ -122,19 +125,17 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
 
     return json_dict
 
-
-ts_base_path = '../../ts'
-if len(sys.argv) > 1:
-    ts_base_path = sys.argv[1]
+ts_base_path = sys.argv[1] if len(sys.argv) > 1 else '../ts'
+exchanges_data_file = sys.argv[2] if len(sys.argv) > 2 else './src/main/resources/exchanges.json'
 
 begin_str_base = r'describe ..: any {$'
 begin_str_exchange = r'return this.deepExtend .super.describe .., {'
 
-exchange_base = extract_json(f'{ts_base_path}/src/base/Exchange.ts', begin_str_base)
+exchange_base = extract_json(f'{ts_base_path}/src/base/Exchange.ts', begin_str_base, ignore_null=False)
 exchange_base = recursive_merge(exchange_base, {'markets': {}})
 
 blacklist = ["digifinex"]
-exchanges = []
+exchanges = {}
 exchange_name_re = re.compile(f'{ts_base_path}/src/([A-Za-z0-9]+).ts')
 for exchange_file in glob.glob(f'{ts_base_path}/src/*.ts'):
     exchange = {}
@@ -145,6 +146,9 @@ for exchange_file in glob.glob(f'{ts_base_path}/src/*.ts'):
             continue
         exchange_def = extract_json(exchange_file, begin_str_exchange, ignore_null=True)
         exchange = recursive_merge(exchange_base, exchange_def)
-        exchanges.append(exchange)
+        exchanges[exchange_name] = exchange
 
-print(json.dumps(exchanges, indent=4, sort_keys=True, ensure_ascii=False))
+with open(exchanges_data_file, 'w', encoding='utf-8') as f:
+    f.write(json.dumps(exchanges, indent=4, sort_keys=True, ensure_ascii=False))
+
+temp_dir.cleanup()
