@@ -9,8 +9,8 @@ rm -f ${JSON_PATH}/*.{json,java}
 # typescript to json-schema
 grep 'export interface' ${TYPES_TS} | grep -v Dictionary | awk '{ print $3 }' | while read class; do
   echo $class
-  npm install --save ts-json-schema-generator
-#npx ts-json-schema-generator --path ${TYPES_TS} --type $class > $JSON_DIR/${class%Interface}.json
+  # $ npm install --save ts-json-schema-generator
+  npx ts-json-schema-generator --path ${TYPES_TS} --type $class > $JSON_DIR/${class%Interface}.json
   sed -i 's/Interface//g' $JSON_DIR/${class%Interface}.json
 done
 
