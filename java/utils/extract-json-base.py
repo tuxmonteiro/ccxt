@@ -21,6 +21,9 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
   extracted = []
   jsonp = "{}"
   json_dict = {}
+  eval_re_str = r': ([-\.0-9]+( . [-\.0-9]+)+)'
+
+  # from "ts/src/base/exchange.ts"
   user_agents = {
     'chrome': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36',
     'chrome39': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36',
@@ -34,7 +37,7 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
     close_brace = re.compile('}')
     ignore_return = re.compile('return {')
     ignore_undefined = re.compile(': undefined')
-    eval_re = re.compile(r': ([-\.0-9]+( . [-\.0-9]+)+)')
+    eval_re = re.compile(eval_re_str)
     for line in f.readlines():
       if begin.search(line) is not None:
         extracted.append('{')
@@ -46,17 +49,12 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
         if ignore_null and ignore_undefined.search(line):
           continue
 
-        line_re = re.sub(r" '", r' "', line)
-        line_re = re.sub(r"':", r'":', line_re)
-        line_re = re.sub(r"',", r'",', line_re)
+        line_re = re.sub(r"(\s+)'", r'\1"', line)
+        line_re = re.sub(r"'([,: ]+)", r'"\1', line_re)
         line_re = re.sub(r"'$", r'"', line_re)
-        line_re = re.sub(r"'([ ]+)", r'"\1', line_re)
         line_re = re.sub(': ([A-Za-z]+),', r': "\1",', line_re)
-        line_re = re.sub(r'"undefined"', 'null', line_re)
-        line_re = re.sub(r'"false"', 'false', line_re)
-        line_re = re.sub(r'"true"', 'true', line_re)
-        line_re = re.sub(r'"null"', 'null', line_re)
-        line_re = re.sub(r'undefined', 'null', line_re)
+        line_re = re.sub(r'"?undefined"?', 'null', line_re)
+        line_re = re.sub(r'"(false|true|null)"', r'\1', line_re)
         line_re = re.sub('this.timeout', '10000', line_re)
         line_re = re.sub(';$', '', line_re)
         line_re = re.sub(r'\)$', '', line_re)
@@ -64,6 +62,7 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
         line_re = re.sub(r'//$', '', line_re)
         line_re = re.sub(r"\\'", "'", line_re)
 
+        # from "ts/src/base/functions/number.ts"
         line_re = re.sub('TRUNCATE', '0', line_re)
         line_re = re.sub('ROUND', '1', line_re)
         line_re = re.sub('ROUND_UP', '2', line_re)
@@ -78,16 +77,15 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
         line_re = re.sub(r"this.userAgents\['chrome39'\]", f"\"{user_agents['chrome39']}\"", line_re)
         line_re = re.sub(r"this.userAgents\['chrome100'\]", f"\"{user_agents['chrome100']}\"", line_re)
 
-        line_re = re.sub('this.safeMarketStructure [(]({.*})[)]', r'\1', line_re)
-        line_re = re.sub('this.safeCurrencyStructure [(]({.*})[)]', r'\1', line_re)
+        line_re = re.sub('this.safe(Market|Currency)Structure [(]({.*})[)]', r'\2', line_re)
         line_re = re.sub('this.parseToInt [(](.*)[)]', r'\1', line_re)
         line_re = re.sub('this.parseNumber .[\'"]([-0-9.]+)[\'"].', r'"\1"', line_re)
         line_re = re.sub(r'" \+ "', '', line_re)
 
         eval_match = eval_re.search(line_re)
         if eval_match is not None:
-          eval_result = eval(eval_match.group(1))
-          line_re = re.sub( r': ([-\.0-9]+( . [-\.0-9]+)+)', f': {eval_result}', line_re)
+          eval_result = eval(eval_match.group(1)) # pylint: disable=eval-used
+          line_re = re.sub(eval_re_str, f': {eval_result}', line_re)
 
         if line_re.strip() == '':
           continue
