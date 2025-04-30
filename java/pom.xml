@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.tuxmonteiro</groupId>
   <artifactId>jccxt</artifactId>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
@@ -25,10 +25,29 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.12.1</version>
         <configuration>
-          <release>21</release>
+          <release>${java.version}</release>
         </configuration>
       </plugin>
+      <!--
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.1.4</version>
+        <configuration>
+          <altDeploymentRepository>
+            internal.repo::default::file://${project.build.directory}/mvn-artifact
+          </altDeploymentRepository>
+        </configuration>
+      </plugin>
+      -->
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>tuxmonteiro</name>
+      <url>https://maven.pkg.github.com/tuxmonteiro/jccxt</url>
+    </repository>
+  </distributionManagement>
 
 </project>
