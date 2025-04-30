@@ -9,11 +9,9 @@ import json
 import sys
 import glob
 import logging as log
-from tempfile import TemporaryDirectory
 
 
-temp_dir = TemporaryDirectory()
-log.basicConfig(filename=f'{temp_dir.name}/app.log', level=log.DEBUG)
+log.basicConfig(filename='app.log', level=log.DEBUG)
 
 
 def recursive_merge(dict1, dict2) -> any:
@@ -98,6 +96,8 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
                 line_re = re.sub('this.safe(Market|Currency)Structure [(]({.*})[)]', r'\2', line_re)
                 line_re = re.sub('this.parseToInt [(](.*)[)]', r'\1', line_re)
                 line_re = re.sub('this.parseNumber .[\'"]([-0-9.]+)[\'"].', r'"\1"', line_re)
+                line_re = re.sub('this.ping', r'"{ping}"', line_re)
+                line_re = re.sub('this.createSafeDictionary [(][)]', r'{}', line_re)
                 line_re = re.sub(r'" \+ "', '', line_re)
 
                 eval_match = eval_re.search(line_re)
@@ -120,16 +120,21 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
     jsonp = re.sub(r',\s*\n(\s*)([\]}])', r'\n\1\2', ''.join(extracted), flags=re.DOTALL)
     try:
         json_dict = json.loads(jsonp)
-    except:
-        log.error(jsonp)
+    except Exception as e:
+        if jsonp.strip() == '':
+            log.error(f'Empty JSONP')
+        else:
+            log.error(jsonp)
+        log.error(e, stack_info=True)
 
     return json_dict
+
 
 ts_base_path = sys.argv[1] if len(sys.argv) > 1 else '../ts'
 exchanges_data_file = sys.argv[2] if len(sys.argv) > 2 else './src/main/resources/exchanges.json'
 
 begin_str_base = r'describe ..: any {$'
-begin_str_exchange = r'return this.deepExtend .super.describe .., {'
+begin_str_exchange = r'(return this.deepExtend .(super.describe .., {|extended, {|describeExtended, {)|^[ ]+describeData .. {)'
 
 exchange_base = extract_json(f'{ts_base_path}/src/base/Exchange.ts', begin_str_base, ignore_null=False)
 exchange_base = recursive_merge(exchange_base, {'markets': {}})
@@ -148,7 +153,17 @@ for exchange_file in glob.glob(f'{ts_base_path}/src/*.ts'):
         exchange = recursive_merge(exchange_base, exchange_def)
         exchanges[exchange_name] = exchange
 
+exchange_name_re = re.compile(f'{ts_base_path}/src/pro/([A-Za-z0-9]+).ts')
+for exchange_file in glob.glob(f'{ts_base_path}/src/pro/*.ts'):
+    exchange = {}
+    exchange_match = exchange_name_re.match(exchange_file)
+    if exchange_match is not None:
+        exchange_name = exchange_match.group(1)
+        if exchange_name in blacklist:
+            continue
+        exchange_def = extract_json(exchange_file, begin_str_exchange, ignore_null=True)
+        exchange = recursive_merge(exchanges[exchange_name], exchange_def)
+        exchanges[exchange_name] = exchange
+
 with open(exchanges_data_file, 'w', encoding='utf-8') as f:
     f.write(json.dumps(exchanges, indent=4, sort_keys=True, ensure_ascii=False))
-
-temp_dir.cleanup()
