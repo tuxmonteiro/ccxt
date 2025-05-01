@@ -9,7 +9,7 @@ import json
 import sys
 import glob
 import logging as log
-
+from json.encoder import JSONEncoder
 
 log.basicConfig(filename='app.log', level=log.DEBUG)
 
@@ -41,8 +41,12 @@ def extract_raw_ws_req(ts_base_path: str, exchange_name: str, functions_name: li
         for function_name in functions_name:
             f.seek(0)
             function_lines = []
+            temp_request_json = []
+            request_json_str = ''
+            request_json = {}
             function_def_re = re.compile(f'^[ ]+async {function_name} [(]')
             count = 0
+            count_request = 0
             for line in f.readlines():
                 if function_def_re.search(line) is not None:
                     count = 1
@@ -53,6 +57,55 @@ def extract_raw_ws_req(ts_base_path: str, exchange_name: str, functions_name: li
                         continue
 
                     function_lines.append(line.strip())
+
+                    if re.search(r'^if ', line.strip()) is None:
+                        if len(temp_request_json) > 0:
+                            count_request += line.count('{')
+                            count_request -= line.count('}')
+
+                            request_str = re.sub(r'\'([A-Za-z0-9\._]+)\'\s*:\s*([^\'{\["][A-Za-z0-9\._]+[^\'"\]}])(,)?', r'"\1": "{\2}"\3', line.strip())
+                            request_str = re.sub(r"^'", r'"', request_str)
+                            request_str = re.sub(r"'([,: ])", r'"\1', request_str)
+                            request_str = re.sub(r"(\s+)'", r'\1"', request_str)
+                            request_str = re.sub('[,;]$', '', request_str)
+                            request_str = re.sub(r'// .*', '', request_str)
+                            request_str = re.sub(r'//$', '', request_str)
+                            request_str = re.sub(r"\\'", "'", request_str)
+
+                            if count_request == 0:
+                                temp_request_json.append('}')
+                                request_json_str = ','.join(temp_request_json)
+                                request_json_str = re.sub(r'([{\[]),', r'\1', request_json_str)
+                                request_json_str = re.sub(r',([}\]])', r'\1', request_json_str)
+                                request_json_str = re.sub(r'"{(true|false|null)}"', r'\1', request_json_str)
+                                request_json_str = re.sub(r'(this\.[^(]+\([^)]+\))\s*(\.toString\s*\(\))?',
+                                                      lambda s:
+                                                          JSONEncoder().encode(
+                                                              r'{' + s.group(1) + r'}'), request_json_str)
+
+                                request_json_str = re.sub(r',(\s*)([\]}])', r'\1\2', request_json_str, flags=re.DOTALL)
+                                request_json_str = re.sub(r'\[\s*([A-Za-z0-9_]+)\s*\]', r'["{\1}"]', request_json_str)
+
+                                temp_request_json = []
+
+                                try:
+                                    request_json = {
+                                        'encoded': False,
+                                        'template': json.loads(request_json_str)
+                                    }
+                                except Exception:
+                                    request_json = {
+                                        'encoded': True,
+                                        'template': JSONEncoder().encode(request_json_str)
+                                    }
+
+
+                            else:
+                                temp_request_json.append(request_str)
+
+                        if re.search(r'request: Dict = {', line) is not None:
+                            count_request = 1
+                            temp_request_json.append('{')
 
                     count += line.count('{')
                     count -= line.count('}')
@@ -91,6 +144,7 @@ def extract_raw_ws_req(ts_base_path: str, exchange_name: str, functions_name: li
             function_raw = function_lines
 
             result[f'{exchange_name}.{function_name}'] = {}
+            result[f'{exchange_name}.{function_name}']['request_template'] = request_json
             result[f'{exchange_name}.{function_name}']['raw'] = function_raw
             result[f'{exchange_name}.{function_name}']['comments'] = comments
 
