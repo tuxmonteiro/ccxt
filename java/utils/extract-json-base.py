@@ -2,7 +2,7 @@
   extract exchanges metadata from ts files and create json data
 """
 
-# pylint: disable=line-too-long, bare-except, invalid-name
+# pylint: disable=line-too-long, bare-except, invalid-name, redefined-outer-name, broad-exception-caught
 
 import re
 import json
@@ -119,7 +119,7 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
         ignore_return = re.compile('return {')
         ignore_undefined = re.compile(r': (undefined|{[ ]?})')
         eval_re = re.compile(eval_re_str)
-        for line in f.readlines():
+        for line in f:
             if begin.search(line) is not None:
                 extracted.append('{')
                 count = 1
@@ -185,7 +185,7 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
         json_dict = json.loads(jsonp)
     except Exception as e:
         if jsonp.strip() == '':
-            log.error(f'Empty JSONP')
+            log.error('Empty JSONP')
         else:
             log.error(jsonp)
         log.error(e, stack_info=True)
