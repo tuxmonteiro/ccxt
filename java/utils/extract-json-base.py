@@ -29,6 +29,73 @@ def recursive_merge(dict1, dict2) -> any:
             base[key] = value
     return base
 
+def extract_raw_ws_req(ts_base_path: str, exchange_name: str, functions_name: list[str]) -> dict:
+    """
+    extract ws request from exchange function definition
+    """
+
+    result = {}
+
+    with open(f'{ts_base_path}/src/pro/{exchange_name}.ts', mode='r', encoding='utf-8') as f:
+
+        for function_name in functions_name:
+            f.seek(0)
+            function_lines = []
+            function_def_re = re.compile(f'^[ ]+async {function_name} [(]')
+            count = 0
+            for line in f.readlines():
+                if function_def_re.search(line) is not None:
+                    count = 1
+                    function_lines.append(line.strip())
+                    continue
+                if len(function_lines) > 0:
+                    if line.strip() == '':
+                        continue
+
+                    function_lines.append(line.strip())
+
+                    count += line.count('{')
+                    count -= line.count('}')
+                    if count == 0:
+                        break
+
+            f.seek(0)
+            comments = []
+
+            for line in f:
+                temp_comments = []
+                if re.search(r'/[*][*]', line) is not None:
+                    temp_comments.append(line.strip())
+                    next_line = f.readline()
+                    if re.search(r'[*] @method', next_line) is not None:
+                        next_line = f.readline()
+                        if re.search(f'[*] @name {exchange_name}#{function_name}', next_line) is not None:
+                            count = 1
+                            comments.extend(temp_comments)
+                            comments.append(next_line.strip())
+                            continue
+                        else:
+                            temp_comments = []
+                            continue
+                    else:
+                        temp_comments = []
+                        continue
+                else:
+                    temp_comments = []
+
+                if len(comments) > 0:
+                    comments.append(line.strip())
+                    if re.search(r'^[ ]+[*]/', line) is not None:
+                        break
+
+            function_raw = function_lines
+
+            result[f'{exchange_name}.{function_name}'] = {}
+            result[f'{exchange_name}.{function_name}']['raw'] = function_raw
+            result[f'{exchange_name}.{function_name}']['comments'] = comments
+
+
+    return result
 
 def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> str:
     """
@@ -46,11 +113,9 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
         'chrome100': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36'
     }
 
-    with open(ts_source, encoding='utf-8') as f:
+    with open(ts_source, mode='r', encoding='utf-8') as f:
         count = 0
         begin = re.compile(begin_str)
-        open_brace = re.compile('{')
-        close_brace = re.compile('}')
         ignore_return = re.compile('return {')
         ignore_undefined = re.compile(r': (undefined|{[ ]?})')
         eval_re = re.compile(eval_re_str)
@@ -110,10 +175,8 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
 
                 extracted.append(line_re)
 
-                if open_brace.search(line) is not None:
-                    count += 1
-                if close_brace.search(line) is not None:
-                    count -= 1
+                count += line_re.count('{')
+                count -= line_re.count('}')
                 if count == 0:
                     break
 
@@ -141,7 +204,9 @@ exchange_base = recursive_merge(exchange_base, {'markets': {}})
 
 blacklist = ["digifinex"]
 exchanges = {}
+
 exchange_name_re = re.compile(f'{ts_base_path}/src/([A-Za-z0-9]+).ts')
+
 for exchange_file in glob.glob(f'{ts_base_path}/src/*.ts'):
     exchange = {}
     exchange_match = exchange_name_re.match(exchange_file)
@@ -154,6 +219,7 @@ for exchange_file in glob.glob(f'{ts_base_path}/src/*.ts'):
         exchanges[exchange_name] = exchange
 
 exchange_name_re = re.compile(f'{ts_base_path}/src/pro/([A-Za-z0-9]+).ts')
+
 for exchange_file in glob.glob(f'{ts_base_path}/src/pro/*.ts'):
     exchange = {}
     exchange_match = exchange_name_re.match(exchange_file)
@@ -162,6 +228,12 @@ for exchange_file in glob.glob(f'{ts_base_path}/src/pro/*.ts'):
         if exchange_name in blacklist:
             continue
         exchange_def = extract_json(exchange_file, begin_str_exchange, ignore_null=True)
+        if 'has' in exchange_def:
+            function_names = [function_name
+                              for function_name, has_function in exchange_def['has'].items()
+                              if function_name != 'ws' and has_function]
+            exchange_def['functions_ws_req'] = extract_raw_ws_req(ts_base_path, exchange_name, function_names)
+
         exchange = recursive_merge(exchanges[exchange_name], exchange_def)
         exchanges[exchange_name] = exchange
 
