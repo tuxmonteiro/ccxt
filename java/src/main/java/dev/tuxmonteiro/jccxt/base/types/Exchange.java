@@ -1,3 +1,5 @@
+package dev.tuxmonteiro.jccxt.base.types;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,193 +11,135 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "accountId",
-    "agent",
-    "api",
-    "apiKey",
-    "balance",
-    "bidsasks",
-    "certified",
-    "countries",
-    "fetchImplementation",
-    "fundingRates",
-    "handleContentTypeApplicationZip",
-    "has",
-    "headers",
-    "httpAgent",
-    "httpProxy",
-    "httpProxyCallback",
-    "httpsAgent",
-    "httpsProxy",
-    "httpsProxyCallback",
-    "id",
-    "isSandboxModeEnabled",
-    "liquidations",
-    "login",
-    "minFundingAddressLength",
-    "myLiquidations",
-    "myTrades",
-    "nodeHttpModuleLoaded",
-    "name",
-    "ohlcvs",
-    "options",
-    "orderbooks",
-    "orders",
-    "origin",
-    "password",
-    "positions",
-    "privateKey",
-    "pro",
-    "proxy",
-    "proxyUrl",
-    "proxyUrlCallback",
-    "quoteJsonNumbers",
-    "reduceFees",
-    "requiresEddsa",
-    "requiresWeb3",
-    "secret",
-    "sleep",
-    "socksProxy",
-    "socksProxyCallback",
-    "substituteCommonCurrencyCodes",
-    "throttleProp",
-    "tickers",
-    "timeout",
-    "token",
-    "trades",
-    "transactions",
-    "triggerOrders",
-    "twofa",
-    "uid",
-    "urls",
-    "userAgent",
-    "userAgents",
-    "validateClientSsl",
-    "validateServerSsl",
-    "verbose",
-    "walletAddress",
-    "wsProxy",
-    "wsSocksProxy",
-    "wssProxy"
+        "alias",
+        "api",
+        "certified",
+        "comment",
+        "commonCurrencies",
+        "countries",
+        "currencies",
+        "dex",
+        "enableRateLimit",
+        "exceptions",
+        "features",
+        "fees",
+        "functions_ws_req",
+        "handleContentTypeApplicationZip",
+        "has",
+        "headers",
+        "hostname",
+        "httpExceptions",
+        "id",
+        "limits",
+        "markets",
+        "name",
+        "options",
+        "paddingMode",
+        "precisionMode",
+        "pro",
+        "quoteJsonNumbers",
+        "rateLimit",
+        "requiredCredentials",
+        "requiresEddsa",
+        "requiresWeb3",
+        "status",
+        "streaming",
+        "timeframes",
+        "timeout",
+        "urls",
+        "userAgent",
+        "version"
 })
-public class Exchange implements Serializable
-{
+public class Exchange implements Serializable {
 
     private final static long serialVersionUID = 4370324370153680134L;
 
-    @JsonProperty("accountId")
-    private String accountId;
-
-    @JsonProperty("agent")
-    private Object agent;
+    @JsonProperty("alias")
+    private Boolean alias;
 
     @JsonProperty("api")
-    private Object api;
-
-    @JsonProperty("apiKey")
-    private String apiKey;
-
-    @JsonProperty("balance")
-    private Balance balance;
-
-    @JsonProperty("bidsasks")
-    private Map<String, Ticker> bidsasks = Map.of();
+    private Map<String, Map<String, String>> api = Map.of();
 
     @JsonProperty("certified")
     private Boolean certified;
 
+    @JsonProperty("comment")
+    private String comment;
+
+    @JsonProperty("commonCurrencies")
+    private Map<String, String> commonCurrencies = Map.of();
+
     @JsonProperty("countries")
-    private List<String> countries = Map.of();
+    private List<String> countries = List.of();
 
-    @JsonProperty("fetchImplementation")
-    private Object fetchImplementation;
+    @JsonProperty("currencies")
+    private Map<String, String> currencies = Map.of();
 
-    @JsonProperty("fundingRates")
-    private Map<String, FundingRate> fundingRates = Map.of();
+    @JsonProperty("dex")
+    private Boolean dex;
+
+    @JsonProperty("enableRateLimit")
+    private Boolean enableRateLimit;
+
+    @JsonProperty("exceptions")
+    private Map<String, Map<String, Object>> exceptions = Map.of();
+
+    @JsonProperty("features")
+    private Map<String, Map<String, Object>> features = Map.of();
+
+    @JsonProperty("fees")
+    private Map<String, Map<String, Object>> fees = Map.of();
+
+    @JsonProperty("functions_ws_req")
+    private Map<String, Map<String, List<String>>> functions_ws_req = Map.of();
 
     @JsonProperty("handleContentTypeApplicationZip")
     private Boolean handleContentTypeApplicationZip;
 
+    @JsonProperty("has")
+    private Map<String, Object> has = Map.of();
+
     @JsonProperty("headers")
-    private Map<Object, Object> headers = Map.of();
+    private Map<String, String> headers = Map.of();
 
-    @JsonProperty("httpAgent")
-    private String httpAgent;
+    @JsonProperty("hostname")
+    private String hostname;
 
-    @JsonProperty("httpProxy")
-    private String httpProxy;
+    @JsonProperty("httpExceptions")
+    private Map<String, String> httpExceptions = Map.of();
 
-    @JsonProperty("httpProxyCallback")
-    private Object httpProxyCallback;
+    @JsonProperty("id")
+    private String id;
 
-    @JsonProperty("httpsAgent")
-    private String httpsAgent;
+    @JsonProperty("limits")
+    private Map<String, Map<String, Double>> limits = Map.of();
 
-    @JsonProperty("httpsProxy")
-    private String httpsProxy;
+    @JsonProperty("markets")
+    private Map<String, Map<String, Object>> markets = Map.of();
 
-    @JsonProperty("httpsProxyCallback")
-    private Object httpsProxyCallback;
-
-    @JsonProperty("isSandboxModeEnabled")
-    private Boolean isSandboxModeEnabled;
-
-    @JsonProperty("liquidations")
-    private Map<String, Liquidation> liquidations = List.of();
-
-    @JsonProperty("login")
-    private String login;
-
-    @JsonProperty("minFundingAddressLength")
-    private Double minFundingAddressLength;
-
-    @JsonProperty("myLiquidations")
-    private Map<String, Liquidation> myLiquidations = Map.of();
-
-    @JsonProperty("myTrades")
-    private Map<String, Trade> myTrades = Map.of();
-
-    @JsonProperty("ohlcvs")
-    private Map<Long, Map<String, Double>> ohlcvs = Map.of();
+    @JsonProperty("name")
+    private String name;
 
     @JsonProperty("options")
-    private Map<String, Option> options = Map.of();
+    private Map<String, Map<String, Object>> options = Map.of();
 
-    @JsonProperty("orderbooks")
-    private Map<String, OrderBook> orderbooks;
+    @JsonProperty("paddingMode")
+    private Integer paddingMode;
 
-    @JsonProperty("orders")
-    private Map<String, Order> orders orders - Map.of();
-
-    @JsonProperty("origin")
-    private String origin;
-
-    @JsonProperty("password")
-    private String password;
-
-    @JsonProperty("positions")
-    private Map<String, Position> positions = Map.of();
-
-    @JsonProperty("privateKey")
-    private String privateKey;
+    @JsonProperty("precisionMode")
+    private Integer precisionMode;
 
     @JsonProperty("pro")
     private Boolean pro;
 
-    @JsonProperty("proxy")
-    private Object proxy;
-
-    @JsonProperty("proxyUrl")
-    private String proxyUrl;
-
-    @JsonProperty("proxyUrlCallback")
-    private Object proxyUrlCallback;
-
     @JsonProperty("quoteJsonNumbers")
     private Boolean quoteJsonNumbers;
 
-    @JsonProperty("reduceFees")
-    private Boolean reduceFees;
+    @JsonProperty("rateLimit")
+    private Integer rateLimit;
+
+    @JsonProperty("requiredCredentials")
+    private Map<String, Boolean> requiredCredentials = Map.of();
 
     @JsonProperty("requiresEddsa")
     private Boolean requiresEddsa;
@@ -203,124 +147,41 @@ public class Exchange implements Serializable
     @JsonProperty("requiresWeb3")
     private Boolean requiresWeb3;
 
-    @JsonProperty("secret")
-    private String secret;
+    @JsonProperty("status")
+    private Map<String, String> status = Map.of();
 
-    @JsonProperty("sleep")
-    private Long sleep;
+    @JsonProperty("streaming")
+    private Map<String, Object> streaming = Map.of();
 
-    @JsonProperty("socksProxy")
-    private String socksProxy;
-
-    @JsonProperty("socksProxyCallback")
-    private Object socksProxyCallback;
-
-    @JsonProperty("substituteCommonCurrencyCodes")
-    private Boolean substituteCommonCurrencyCodes;
-
-    @JsonProperty("throttleProp")
-    private Object throttleProp;
-
-    @JsonProperty("tickers")
-    private Map<String, Ticker> tickers = Map.of();
+    @JsonProperty("timeframes")
+    private Map<String, String> timeframes = Map.of();
 
     @JsonProperty("timeout")
-    private Double timeout;
-
-    @JsonProperty("token")
-    private String token;
-
-    @JsonProperty("trades")
-    private Map<String, Trade> trades = Map.of();
-
-    @JsonProperty("transactions")
-    private Map<String, Transaction> transactions = Map.of();
-
-    @JsonProperty("triggerOrders")
-    private TriggerOrders triggerOrders;
-
-    @JsonProperty("twofa")
-    private Object twofa;
-
-    @JsonProperty("uid")
-    private String uid;
+    private Integer timeout;
 
     @JsonProperty("urls")
-    private Urls urls;
+    private Map<String, Object> urls = Map.of();
 
     @JsonProperty("userAgent")
     private String userAgent;
 
-    @JsonProperty("userAgents")
-    private Map<String, String> userAgents;
+    @JsonProperty("version")
+    private String version;
 
-    @JsonProperty("validateClientSsl")
-    private Boolean validateClientSsl;
-
-    @JsonProperty("validateServerSsl")
-    private Boolean validateServerSsl;
-
-    @JsonProperty("verbose")
-    private Boolean verbose;
-
-    @JsonProperty("walletAddress")
-    private String walletAddress;
-
-    @JsonProperty("wsProxy")
-    private String wsProxy;
-
-    @JsonProperty("wsSocksProxy")
-    private String wsSocksProxy;
-
-    @JsonProperty("wssProxy")
-    private String wssProxy;
-
-    public String getAccountId() {
-        return accountId;
+    public Boolean getAlias() {
+        return alias;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setAlias(Boolean alias) {
+        this.alias = alias;
     }
 
-    public Object getAgent() {
-        return agent;
-    }
-
-    public void setAgent(Object agent) {
-        this.agent = agent;
-    }
-
-    public Object getApi() {
+    public Map<String, Map<String, String>> getApi() {
         return api;
     }
 
-    public void setApi(Object api) {
+    public void setApi(Map<String, Map<String, String>> api) {
         this.api = api;
-    }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    public Balance getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Balance balance) {
-        this.balance = balance;
-    }
-
-    public Map<String, Ticker> getBidsasks() {
-        return bidsasks;
-    }
-
-    public void setBidsasks(Map<String, Ticker> bidsasks) {
-        this.bidsasks = bidsasks;
     }
 
     public Boolean getCertified() {
@@ -331,6 +192,22 @@ public class Exchange implements Serializable
         this.certified = certified;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Map<String, String> getCommonCurrencies() {
+        return commonCurrencies;
+    }
+
+    public void setCommonCurrencies(Map<String, String> commonCurrencies) {
+        this.commonCurrencies = commonCurrencies;
+    }
+
     public List<String> getCountries() {
         return countries;
     }
@@ -339,20 +216,60 @@ public class Exchange implements Serializable
         this.countries = countries;
     }
 
-    public Object getFetchImplementation() {
-        return fetchImplementation;
+    public Map<String, String> getCurrencies() {
+        return currencies;
     }
 
-    public void setFetchImplementation(Object fetchImplementation) {
-        this.fetchImplementation = fetchImplementation;
+    public void setCurrencies(Map<String, String> currencies) {
+        this.currencies = currencies;
     }
 
-    public Map<String, FundingRate> getFundingRates() {
-        return fundingRates;
+    public Boolean getDex() {
+        return dex;
     }
 
-    public void setFundingRates(Map<String, FundingRate> fundingRates) {
-        this.fundingRates = fundingRates;
+    public void setDex(Boolean dex) {
+        this.dex = dex;
+    }
+
+    public Boolean getEnableRateLimit() {
+        return enableRateLimit;
+    }
+
+    public void setEnableRateLimit(Boolean enableRateLimit) {
+        this.enableRateLimit = enableRateLimit;
+    }
+
+    public Map<String, Map<String, Object>> getExceptions() {
+        return exceptions;
+    }
+
+    public void setExceptions(Map<String, Map<String, Object>> exceptions) {
+        this.exceptions = exceptions;
+    }
+
+    public Map<String, Map<String, Object>> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(Map<String, Map<String, Object>> features) {
+        this.features = features;
+    }
+
+    public Map<String, Map<String, Object>> getFees() {
+        return fees;
+    }
+
+    public void setFees(Map<String, Map<String, Object>> fees) {
+        this.fees = fees;
+    }
+
+    public Map<String, Map<String, List<String>>> getFunctions_ws_req() {
+        return functions_ws_req;
+    }
+
+    public void setFunctions_ws_req(Map<String, Map<String, List<String>>> functions_ws_req) {
+        this.functions_ws_req = functions_ws_req;
     }
 
     public Boolean getHandleContentTypeApplicationZip() {
@@ -363,172 +280,92 @@ public class Exchange implements Serializable
         this.handleContentTypeApplicationZip = handleContentTypeApplicationZip;
     }
 
-    public Map<Object, Object> getHeaders() {
+    public Map<String, Object> getHas() {
+        return has;
+    }
+
+    public void setHas(Map<String, Object> has) {
+        this.has = has;
+    }
+
+    public Map<String, String> getHeaders() {
         return headers;
     }
 
-    public void setHeaders(Map<Object, Object> headers) {
+    public void setHeaders(Map<String, String> headers) {
         this.headers = headers;
     }
 
-    public String getHttpAgent() {
-        return httpAgent;
+    public String getHostname() {
+        return hostname;
     }
 
-    public void setHttpAgent(String httpAgent) {
-        this.httpAgent = httpAgent;
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
     }
 
-    public String getHttpProxy() {
-        return httpProxy;
+    public Map<String, String> getHttpExceptions() {
+        return httpExceptions;
     }
 
-    public void setHttpProxy(String httpProxy) {
-        this.httpProxy = httpProxy;
+    public void setHttpExceptions(Map<String, String> httpExceptions) {
+        this.httpExceptions = httpExceptions;
     }
 
-    public Object getHttpProxyCallback() {
-        return httpProxyCallback;
+    public String getId() {
+        return id;
     }
 
-    public void setHttpProxyCallback(Object httpProxyCallback) {
-        this.httpProxyCallback = httpProxyCallback;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getHttpsAgent() {
-        return httpsAgent;
+    public Map<String, Map<String, Double>> getLimits() {
+        return limits;
     }
 
-    public void setHttpsAgent(String httpsAgent) {
-        this.httpsAgent = httpsAgent;
+    public void setLimits(Map<String, Map<String, Double>> limits) {
+        this.limits = limits;
     }
 
-    public String getHttpsProxy() {
-        return httpsProxy;
+    public Map<String, Map<String, Object>> getMarkets() {
+        return markets;
     }
 
-    public void setHttpsProxy(String httpsProxy) {
-        this.httpsProxy = httpsProxy;
+    public void setMarkets(Map<String, Map<String, Object>> markets) {
+        this.markets = markets;
     }
 
-    public Object getHttpsProxyCallback() {
-        return httpsProxyCallback;
+    public String getName() {
+        return name;
     }
 
-    public void setHttpsProxyCallback(Object httpsProxyCallback) {
-        this.httpsProxyCallback = httpsProxyCallback;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Boolean getIsSandboxModeEnabled() {
-        return isSandboxModeEnabled;
-    }
-
-    public void setIsSandboxModeEnabled(Boolean isSandboxModeEnabled) {
-        this.isSandboxModeEnabled = isSandboxModeEnabled;
-    }
-
-    public Map<String, Liquidation> getLiquidations() {
-        return liquidations;
-    }
-
-    public void setLiquidations(Map<String, Liquidation> liquidations) {
-        this.liquidations = liquidations;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public Double getMinFundingAddressLength() {
-        return minFundingAddressLength;
-    }
-
-    public void setMinFundingAddressLength(Double minFundingAddressLength) {
-        this.minFundingAddressLength = minFundingAddressLength;
-    }
-
-    public Map<String, Liquidation> getMyLiquidations() {
-        return myLiquidations;
-    }
-
-    public void setMyLiquidations(Map<String, Liquidation> myLiquidations) {
-        this.myLiquidations = myLiquidations;
-    }
-
-    public Map<String, Trade> getMyTrades() {
-        return myTrades;
-    }
-
-    public void setMyTrades(Map<String, Trade> myTrades) {
-        this.myTrades = myTrades;
-    }
-
-    public Map<Long, Map<String, Double>> getOhlcvs() {
-        return ohlcvs;
-    }
-
-    public void setOhlcvs(Map<Long, Map<String, Double>> ohlcvs) {
-        this.ohlcvs = ohlcvs;
-    }
-
-    public Map<String, Option> getOptions() {
+    public Map<String, Map<String, Object>> getOptions() {
         return options;
     }
 
-    public void setOptions(Map<String, Option> options) {
+    public void setOptions(Map<String, Map<String, Object>> options) {
         this.options = options;
     }
 
-    public Map<String, OrderBook> getOrderbooks() {
-        return orderbooks;
+    public Integer getPaddingMode() {
+        return paddingMode;
     }
 
-    public void setOrderbooks(Map<String, OrderBook> orderbooks) {
-        this.orderbooks = orderbooks;
+    public void setPaddingMode(Integer paddingMode) {
+        this.paddingMode = paddingMode;
     }
 
-    public Map<String, Order> getOrders() {
-        return orders;
+    public Integer getPrecisionMode() {
+        return precisionMode;
     }
 
-    public void setOrders(Map<String, Order> orders) {
-        this.orders = orders;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Map<String, Position> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(Map<String, Position> positions) {
-        this.positions = positions;
-    }
-
-    public String getPrivateKey() {
-        return privateKey;
-    }
-
-    public void setPrivateKey(String privateKey) {
-        this.privateKey = privateKey;
+    public void setPrecisionMode(Integer precisionMode) {
+        this.precisionMode = precisionMode;
     }
 
     public Boolean getPro() {
@@ -539,30 +376,6 @@ public class Exchange implements Serializable
         this.pro = pro;
     }
 
-    public Object getProxy() {
-        return proxy;
-    }
-
-    public void setProxy(Object proxy) {
-        this.proxy = proxy;
-    }
-
-    public String getProxyUrl() {
-        return proxyUrl;
-    }
-
-    public void setProxyUrl(String proxyUrl) {
-        this.proxyUrl = proxyUrl;
-    }
-
-    public Object getProxyUrlCallback() {
-        return proxyUrlCallback;
-    }
-
-    public void setProxyUrlCallback(Object proxyUrlCallback) {
-        this.proxyUrlCallback = proxyUrlCallback;
-    }
-
     public Boolean getQuoteJsonNumbers() {
         return quoteJsonNumbers;
     }
@@ -571,12 +384,20 @@ public class Exchange implements Serializable
         this.quoteJsonNumbers = quoteJsonNumbers;
     }
 
-    public Boolean getReduceFees() {
-        return reduceFees;
+    public Integer getRateLimit() {
+        return rateLimit;
     }
 
-    public void setReduceFees(Boolean reduceFees) {
-        this.reduceFees = reduceFees;
+    public void setRateLimit(Integer rateLimit) {
+        this.rateLimit = rateLimit;
+    }
+
+    public Map<String, Boolean> getRequiredCredentials() {
+        return requiredCredentials;
+    }
+
+    public void setRequiredCredentials(Map<String, Boolean> requiredCredentials) {
+        this.requiredCredentials = requiredCredentials;
     }
 
     public Boolean getRequiresEddsa() {
@@ -595,123 +416,43 @@ public class Exchange implements Serializable
         this.requiresWeb3 = requiresWeb3;
     }
 
-    public String getSecret() {
-        return secret;
+    public Map<String, String> getStatus() {
+        return status;
     }
 
-    public void setSecret(String secret) {
-        this.secret = secret;
+    public void setStatus(Map<String, String> status) {
+        this.status = status;
     }
 
-    public Long getSleep() {
-        return sleep;
+    public Map<String, Object> getStreaming() {
+        return streaming;
     }
 
-    public void setSleep(Long sleep) {
-        this.sleep = sleep;
+    public void setStreaming(Map<String, Object> streaming) {
+        this.streaming = streaming;
     }
 
-    public String getSocksProxy() {
-        return socksProxy;
+    public Map<String, String> getTimeframes() {
+        return timeframes;
     }
 
-    public void setSocksProxy(String socksProxy) {
-        this.socksProxy = socksProxy;
+    public void setTimeframes(Map<String, String> timeframes) {
+        this.timeframes = timeframes;
     }
 
-    public Object getSocksProxyCallback() {
-        return socksProxyCallback;
-    }
-
-    public void setSocksProxyCallback(Object socksProxyCallback) {
-        this.socksProxyCallback = socksProxyCallback;
-    }
-
-    public Boolean getSubstituteCommonCurrencyCodes() {
-        return substituteCommonCurrencyCodes;
-    }
-
-    public void setSubstituteCommonCurrencyCodes(Boolean substituteCommonCurrencyCodes) {
-        this.substituteCommonCurrencyCodes = substituteCommonCurrencyCodes;
-    }
-
-    public Object getThrottleProp() {
-        return throttleProp;
-    }
-
-    public void setThrottleProp(Object throttleProp) {
-        this.throttleProp = throttleProp;
-    }
-
-    public Map<String, Ticker> getTickers() {
-        return tickers;
-    }
-
-    public void setTickers(Map<String, Ticker> tickers) {
-        this.tickers = tickers;
-    }
-
-    public Double getTimeout() {
+    public Integer getTimeout() {
         return timeout;
     }
 
-    public void setTimeout(Double timeout) {
+    public void setTimeout(Integer timeout) {
         this.timeout = timeout;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Map<String, Trade> getTrades() {
-        return trades;
-    }
-
-    public void setTrades(Map<String, Trade> trades) {
-        this.trades = trades;
-    }
-
-    public Map<String, Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Map<String, Transaction> transactions) {
-        this.transactions = transactions;
-    }
-
-    public TriggerOrders getTriggerOrders() {
-        return triggerOrders;
-    }
-
-    public void setTriggerOrders(TriggerOrders triggerOrders) {
-        this.triggerOrders = triggerOrders;
-    }
-
-    public Object getTwofa() {
-        return twofa;
-    }
-
-    public void setTwofa(Object twofa) {
-        this.twofa = twofa;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public Urls getUrls() {
+    public Map<String, Object> getUrls() {
         return urls;
     }
 
-    public void setUrls(Urls urls) {
+    public void setUrls(Map<String, Object> urls) {
         this.urls = urls;
     }
 
@@ -723,69 +464,55 @@ public class Exchange implements Serializable
         this.userAgent = userAgent;
     }
 
-    public Map<String, String> getUserAgents() {
-        return userAgents;
+    public String getVersion() {
+        return version;
     }
 
-    public void setUserAgents(Map<String, String> userAgents) {
-        this.userAgents = userAgents;
+    public void setVersion(String version) {
+        this.version = version;
     }
 
-    public Boolean getValidateClientSsl() {
-        return validateClientSsl;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((version == null) ? 0 : version.hashCode());
+        return result;
     }
 
-    public void setValidateClientSsl(Boolean validateClientSsl) {
-        this.validateClientSsl = validateClientSsl;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Exchange other = (Exchange) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (version == null) {
+            if (other.version != null)
+                return false;
+        } else if (!version.equals(other.version))
+            return false;
+        return true;
     }
 
-    public Boolean getValidateServerSsl() {
-        return validateServerSsl;
+    @Override
+    public String toString() {
+        return "Exchange [alias=" + alias + ", comment=" + comment + ", countries=" + countries + ", hostname="
+                + hostname + ", id=" + id + ", name=" + name + ", pro=" + pro + ", requiresEddsa=" + requiresEddsa
+                + ", requiresWeb3=" + requiresWeb3 + ", version=" + version + "]";
     }
-
-    public void setValidateServerSsl(Boolean validateServerSsl) {
-        this.validateServerSsl = validateServerSsl;
-    }
-
-    public Boolean getVerbose() {
-        return verbose;
-    }
-
-    public void setVerbose(Boolean verbose) {
-        this.verbose = verbose;
-    }
-
-    public String getWalletAddress() {
-        return walletAddress;
-    }
-
-    public void setWalletAddress(String walletAddress) {
-        this.walletAddress = walletAddress;
-    }
-
-    public String getWsProxy() {
-        return wsProxy;
-    }
-
-    public void setWsProxy(String wsProxy) {
-        this.wsProxy = wsProxy;
-    }
-
-    public String getWsSocksProxy() {
-        return wsSocksProxy;
-    }
-
-    public void setWsSocksProxy(String wsSocksProxy) {
-        this.wsSocksProxy = wsSocksProxy;
-    }
-
-    public String getWssProxy() {
-        return wssProxy;
-    }
-
-    public void setWssProxy(String wssProxy) {
-        this.wssProxy = wssProxy;
-    }
-
 
 }
+
+
+
+
+
