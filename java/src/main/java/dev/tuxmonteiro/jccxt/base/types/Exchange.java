@@ -58,7 +58,7 @@ public class Exchange implements Serializable {
     private Boolean alias;
 
     @JsonProperty("api")
-    private Map<String, Map<String, String>> api = Map.of();
+    private Map<String, Map<String, List<String>>> api = Map.of();
 
     @JsonProperty("certified")
     private Boolean certified;
