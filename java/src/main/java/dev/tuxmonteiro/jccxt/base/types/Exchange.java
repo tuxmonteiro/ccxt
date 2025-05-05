@@ -91,7 +91,7 @@ public class Exchange implements Serializable {
     private Map<String, Object> fees = Map.of();
 
     @JsonProperty("functions_ws_req")
-    private Map<String, Map<String, Object>> functions_ws_req = Map.of();
+    private Map<String, FunctionsWsReq> functionsWsReq = Map.of();
 
     @JsonProperty("handleContentTypeApplicationZip")
     private Boolean handleContentTypeApplicationZip;
@@ -264,12 +264,12 @@ public class Exchange implements Serializable {
         this.fees = fees;
     }
 
-    public Map<String, Map<String, Object>> getFunctions_ws_req() {
-        return functions_ws_req;
+    public Map<String, FunctionsWsReq> getFunctionsWsReq() {
+        return functionsWsReq;
     }
 
-    public void setFunctions_ws_req(Map<String, Map<String, Object>> functions_ws_req) {
-        this.functions_ws_req = functions_ws_req;
+    public void setFunctionsWsReq(Map<String, FunctionsWsReq> functionsWsReq) {
+        this.functionsWsReq = functionsWsReq;
     }
 
     public Boolean getHandleContentTypeApplicationZip() {
@@ -508,6 +508,6 @@ public class Exchange implements Serializable {
         return "Exchange [alias=" + alias + ", comment=" + comment + ", countries=" + countries + ", hostname="
                 + hostname + ", id=" + id + ", name=" + name + ", pro=" + pro + ", requiresEddsa=" + requiresEddsa
                 + ", requiresWeb3=" + requiresWeb3 + ", version=" + version + "]";
+    }
 
-
-
+}
