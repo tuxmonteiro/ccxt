@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * Request parameters
- * 
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -18,12 +18,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class MinMax implements Serializable
 {
+    private final static long serialVersionUID = 5855206762472014217L;
 
     @JsonProperty("max")
     private Double max;
     @JsonProperty("min")
     private Double min;
-    private final static long serialVersionUID = 5855206762472014217L;
 
     @JsonProperty("max")
     public Optional<Double> getMax() {

@@ -9,55 +9,55 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "amount",
-    "cost",
-    "leverage",
-    "market",
-    "price"
+        "amount",
+        "cost",
+        "leverage",
+        "market",
+        "price"
 })
-public class Limits implements Serializable
-{
+public class Limits implements Serializable {
+
+    private final static long serialVersionUID = -48593676845442859L;
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("amount")
     @JsonPropertyDescription("Request parameters")
     private MinMax amount;
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("cost")
     @JsonPropertyDescription("Request parameters")
     private MinMax cost;
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("leverage")
     @JsonPropertyDescription("Request parameters")
     private MinMax leverage;
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("market")
     @JsonPropertyDescription("Request parameters")
     private MinMax market;
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("price")
     @JsonPropertyDescription("Request parameters")
     private MinMax price;
-    private final static long serialVersionUID = -48593676845442859L;
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("amount")
     public Optional<MinMax> getAmount() {
@@ -66,7 +66,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("amount")
     public void setAmount(MinMax amount) {
@@ -75,7 +75,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("cost")
     public Optional<MinMax> getCost() {
@@ -84,7 +84,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("cost")
     public void setCost(MinMax cost) {
@@ -93,7 +93,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("leverage")
     public Optional<MinMax> getLeverage() {
@@ -102,7 +102,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("leverage")
     public void setLeverage(MinMax leverage) {
@@ -111,7 +111,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("market")
     public Optional<MinMax> getMarket() {
@@ -120,7 +120,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("market")
     public void setMarket(MinMax market) {
@@ -129,7 +129,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("price")
     public Optional<MinMax> getPrice() {
@@ -138,7 +138,7 @@ public class Limits implements Serializable
 
     /**
      * Request parameters
-     * 
+     *
      */
     @JsonProperty("price")
     public void setPrice(MinMax price) {
@@ -148,29 +148,30 @@ public class Limits implements Serializable
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Limits.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Limits.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
         sb.append("amount");
         sb.append('=');
-        sb.append(((this.amount == null)?"<null>":this.amount));
+        sb.append(((this.amount == null) ? "<null>" : this.amount));
         sb.append(',');
         sb.append("cost");
         sb.append('=');
-        sb.append(((this.cost == null)?"<null>":this.cost));
+        sb.append(((this.cost == null) ? "<null>" : this.cost));
         sb.append(',');
         sb.append("leverage");
         sb.append('=');
-        sb.append(((this.leverage == null)?"<null>":this.leverage));
+        sb.append(((this.leverage == null) ? "<null>" : this.leverage));
         sb.append(',');
         sb.append("market");
         sb.append('=');
-        sb.append(((this.market == null)?"<null>":this.market));
+        sb.append(((this.market == null) ? "<null>" : this.market));
         sb.append(',');
         sb.append("price");
         sb.append('=');
-        sb.append(((this.price == null)?"<null>":this.price));
+        sb.append(((this.price == null) ? "<null>" : this.price));
         sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
         } else {
             sb.append(']');
         }
@@ -180,11 +181,11 @@ public class Limits implements Serializable
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.market == null)? 0 :this.market.hashCode()));
-        result = ((result* 31)+((this.leverage == null)? 0 :this.leverage.hashCode()));
-        result = ((result* 31)+((this.amount == null)? 0 :this.amount.hashCode()));
-        result = ((result* 31)+((this.cost == null)? 0 :this.cost.hashCode()));
-        result = ((result* 31)+((this.price == null)? 0 :this.price.hashCode()));
+        result = ((result * 31) + ((this.market == null) ? 0 : this.market.hashCode()));
+        result = ((result * 31) + ((this.leverage == null) ? 0 : this.leverage.hashCode()));
+        result = ((result * 31) + ((this.amount == null) ? 0 : this.amount.hashCode()));
+        result = ((result * 31) + ((this.cost == null) ? 0 : this.cost.hashCode()));
+        result = ((result * 31) + ((this.price == null) ? 0 : this.price.hashCode()));
         return result;
     }
 
@@ -197,7 +198,11 @@ public class Limits implements Serializable
             return false;
         }
         Limits rhs = ((Limits) other);
-        return ((((((this.market == rhs.market)||((this.market!= null)&&this.market.equals(rhs.market)))&&((this.leverage == rhs.leverage)||((this.leverage!= null)&&this.leverage.equals(rhs.leverage))))&&((this.amount == rhs.amount)||((this.amount!= null)&&this.amount.equals(rhs.amount))))&&((this.cost == rhs.cost)||((this.cost!= null)&&this.cost.equals(rhs.cost))))&&((this.price == rhs.price)||((this.price!= null)&&this.price.equals(rhs.price))));
+        return ((((((this.market == rhs.market) || ((this.market != null) && this.market.equals(rhs.market)))
+                && ((this.leverage == rhs.leverage) || ((this.leverage != null) && this.leverage.equals(rhs.leverage))))
+                && ((this.amount == rhs.amount) || ((this.amount != null) && this.amount.equals(rhs.amount))))
+                && ((this.cost == rhs.cost) || ((this.cost != null) && this.cost.equals(rhs.cost))))
+                && ((this.price == rhs.price) || ((this.price != null) && this.price.equals(rhs.price))));
     }
 
 }

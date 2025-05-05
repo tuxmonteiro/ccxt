@@ -58,7 +58,7 @@ public class Exchange implements Serializable {
     private Boolean alias;
 
     @JsonProperty("api")
-    private Map<String, Map<String, List<String>>> api = Map.of();
+    private Map<String, Map<String, Object>> api = Map.of();
 
     @JsonProperty("certified")
     private Boolean certified;
@@ -73,7 +73,7 @@ public class Exchange implements Serializable {
     private List<String> countries = List.of();
 
     @JsonProperty("currencies")
-    private Map<String, String> currencies = Map.of();
+    private Map<String, Currency> currencies = Map.of();
 
     @JsonProperty("dex")
     private Boolean dex;
@@ -82,16 +82,16 @@ public class Exchange implements Serializable {
     private Boolean enableRateLimit;
 
     @JsonProperty("exceptions")
-    private Map<String, Map<String, Object>> exceptions = Map.of();
+    private Map<String, Object> exceptions = Map.of();
 
     @JsonProperty("features")
     private Map<String, Map<String, Object>> features = Map.of();
 
     @JsonProperty("fees")
-    private Map<String, Map<String, Object>> fees = Map.of();
+    private Map<String, Object> fees = Map.of();
 
     @JsonProperty("functions_ws_req")
-    private Map<String, Map<String, List<String>>> functions_ws_req = Map.of();
+    private Map<String, Map<String, Object>> functions_ws_req = Map.of();
 
     @JsonProperty("handleContentTypeApplicationZip")
     private Boolean handleContentTypeApplicationZip;
@@ -112,16 +112,16 @@ public class Exchange implements Serializable {
     private String id;
 
     @JsonProperty("limits")
-    private Map<String, Map<String, Double>> limits = Map.of();
+    private Limits limits;
 
     @JsonProperty("markets")
-    private Map<String, Map<String, Object>> markets = Map.of();
+    private Map<String, Market> markets = Map.of();
 
     @JsonProperty("name")
     private String name;
 
     @JsonProperty("options")
-    private Map<String, Map<String, Object>> options = Map.of();
+    private Map<String, Object> options = Map.of();
 
     @JsonProperty("paddingMode")
     private Integer paddingMode;
@@ -160,7 +160,7 @@ public class Exchange implements Serializable {
     private Integer timeout;
 
     @JsonProperty("urls")
-    private Map<String, Object> urls = Map.of();
+    private Urls urls;
 
     @JsonProperty("userAgent")
     private String userAgent;
@@ -176,11 +176,11 @@ public class Exchange implements Serializable {
         this.alias = alias;
     }
 
-    public Map<String, Map<String, String>> getApi() {
+    public Map<String, Map<String, Object>> getApi() {
         return api;
     }
 
-    public void setApi(Map<String, Map<String, String>> api) {
+    public void setApi(Map<String, Map<String, Object>> api) {
         this.api = api;
     }
 
@@ -216,11 +216,11 @@ public class Exchange implements Serializable {
         this.countries = countries;
     }
 
-    public Map<String, String> getCurrencies() {
+    public Map<String, Currency> getCurrencies() {
         return currencies;
     }
 
-    public void setCurrencies(Map<String, String> currencies) {
+    public void setCurrencies(Map<String, Currency> currencies) {
         this.currencies = currencies;
     }
 
@@ -240,11 +240,11 @@ public class Exchange implements Serializable {
         this.enableRateLimit = enableRateLimit;
     }
 
-    public Map<String, Map<String, Object>> getExceptions() {
+    public Map<String, Object> getExceptions() {
         return exceptions;
     }
 
-    public void setExceptions(Map<String, Map<String, Object>> exceptions) {
+    public void setExceptions(Map<String, Object> exceptions) {
         this.exceptions = exceptions;
     }
 
@@ -256,19 +256,19 @@ public class Exchange implements Serializable {
         this.features = features;
     }
 
-    public Map<String, Map<String, Object>> getFees() {
+    public Map<String, Object> getFees() {
         return fees;
     }
 
-    public void setFees(Map<String, Map<String, Object>> fees) {
+    public void setFees(Map<String, Object> fees) {
         this.fees = fees;
     }
 
-    public Map<String, Map<String, List<String>>> getFunctions_ws_req() {
+    public Map<String, Map<String, Object>> getFunctions_ws_req() {
         return functions_ws_req;
     }
 
-    public void setFunctions_ws_req(Map<String, Map<String, List<String>>> functions_ws_req) {
+    public void setFunctions_ws_req(Map<String, Map<String, Object>> functions_ws_req) {
         this.functions_ws_req = functions_ws_req;
     }
 
@@ -320,19 +320,19 @@ public class Exchange implements Serializable {
         this.id = id;
     }
 
-    public Map<String, Map<String, Double>> getLimits() {
+    public Limits getLimits() {
         return limits;
     }
 
-    public void setLimits(Map<String, Map<String, Double>> limits) {
+    public void setLimits(Limits limits) {
         this.limits = limits;
     }
 
-    public Map<String, Map<String, Object>> getMarkets() {
+    public Map<String, Market> getMarkets() {
         return markets;
     }
 
-    public void setMarkets(Map<String, Map<String, Object>> markets) {
+    public void setMarkets(Map<String, Market> markets) {
         this.markets = markets;
     }
 
@@ -344,11 +344,11 @@ public class Exchange implements Serializable {
         this.name = name;
     }
 
-    public Map<String, Map<String, Object>> getOptions() {
+    public Map<String, Object> getOptions() {
         return options;
     }
 
-    public void setOptions(Map<String, Map<String, Object>> options) {
+    public void setOptions(Map<String, Object> options) {
         this.options = options;
     }
 
@@ -448,11 +448,11 @@ public class Exchange implements Serializable {
         this.timeout = timeout;
     }
 
-    public Map<String, Object> getUrls() {
+    public Urls getUrls() {
         return urls;
     }
 
-    public void setUrls(Map<String, Object> urls) {
+    public void setUrls(Urls urls) {
         this.urls = urls;
     }
 
@@ -508,11 +508,6 @@ public class Exchange implements Serializable {
         return "Exchange [alias=" + alias + ", comment=" + comment + ", countries=" + countries + ", hostname="
                 + hostname + ", id=" + id + ", name=" + name + ", pro=" + pro + ", requiresEddsa=" + requiresEddsa
                 + ", requiresWeb3=" + requiresWeb3 + ", version=" + version + "]";
-    }
-
-}
-
-
 
 
 
