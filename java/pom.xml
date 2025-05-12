@@ -46,7 +46,7 @@
     <repository>
       <id>github</id>
       <name>tuxmonteiro</name>
-      <url>https://maven.pkg.github.com/tuxmonteiro/jccxt</url>
+      <url>https://maven.pkg.github.com/tuxmonteiro/ccxt</url>
     </repository>
   </distributionManagement>
 
