@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.tuxmonteiro</groupId>
-  <artifactId>jccxt</artifactId>
+  <artifactId>ccxt</artifactId>
   <version>1.8-SNAPSHOT</version>
 
   <properties>
