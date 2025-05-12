@@ -29,6 +29,7 @@ def recursive_merge(dict1, dict2) -> any:
             base[key] = value
     return base
 
+
 def extract_raw_ws_req(ts_base_path: str, exchange_name: str, functions_name: list[str]) -> dict:
     """
     extract ws request from exchange function definition
@@ -79,7 +80,7 @@ def extract_raw_ws_req(ts_base_path: str, exchange_name: str, functions_name: li
                                 request_json_str = re.sub(r',([}\]])', r'\1', request_json_str)
                                 request_json_str = re.sub(r'"{(true|false|null)}"', r'\1', request_json_str)
                                 request_json_str = re.sub(r'(this\.[^(]+\([^)]+\))\s*(\.toString\s*\(\))?',
-                                                      lambda s:
+                                                          lambda s:
                                                           JSONEncoder().encode(
                                                               r'{' + s.group(1) + r'}'), request_json_str)
 
@@ -98,7 +99,6 @@ def extract_raw_ws_req(ts_base_path: str, exchange_name: str, functions_name: li
                                         'encoded': True,
                                         'template': JSONEncoder().encode(request_json_str)
                                     }
-
 
                             else:
                                 temp_request_json.append(request_str)
@@ -148,8 +148,8 @@ def extract_raw_ws_req(ts_base_path: str, exchange_name: str, functions_name: li
             result[f'{exchange_name}.{function_name}']['raw'] = function_raw
             result[f'{exchange_name}.{function_name}']['comments'] = comments
 
-
     return result
+
 
 def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> str:
     """
@@ -249,6 +249,7 @@ def extract_json(ts_source: str, begin_str: str, ignore_null: bool = False) -> s
 
 ts_base_path = sys.argv[1] if len(sys.argv) > 1 else '../ts'
 exchanges_data_file = sys.argv[2] if len(sys.argv) > 2 else './src/main/resources/exchanges.json'
+functions_list_file = sys.argv[2] if len(sys.argv) > 2 else './src/main/resources/functions.list'
 
 begin_str_base = r'describe ..: any {$'
 begin_str_exchange = r'(return this.deepExtend .(super.describe .., {|extended, {|describeExtended, {)|^[ ]+describeData .. {)'
@@ -258,6 +259,7 @@ exchange_base = recursive_merge(exchange_base, {'markets': {}})
 
 blacklist = ["digifinex"]
 exchanges = {}
+all_functions = set()
 
 exchange_name_re = re.compile(f'{ts_base_path}/src/([A-Za-z0-9]+).ts')
 
@@ -287,9 +289,38 @@ for exchange_file in glob.glob(f'{ts_base_path}/src/pro/*.ts'):
                               for function_name, has_function in exchange_def['has'].items()
                               if function_name != 'ws' and has_function]
             exchange_def['functions_ws_req'] = extract_raw_ws_req(ts_base_path, exchange_name, function_names)
+            all_functions.update(function_names)
 
         exchange = recursive_merge(exchanges[exchange_name], exchange_def)
         exchanges[exchange_name] = exchange
 
+json_exchanges = json.dumps(exchanges, indent=4, sort_keys=True, ensure_ascii=False)
 with open(exchanges_data_file, 'w', encoding='utf-8') as f:
-    f.write(json.dumps(exchanges, indent=4, sort_keys=True, ensure_ascii=False))
+    f.write(json_exchanges)
+
+verbs_prefix = [
+    "add",
+    "borrow",
+    "cancel",
+    "close",
+    "create",
+    "deposit",
+    "edit",
+    "fetch",
+    "future",
+    "margin",
+    "option",
+    "reduce",
+    "repay",
+    "set",
+    "signIn",
+    "spot",
+    "swap",
+    "tranfer",
+    "watch",
+    "withdraw"
+]
+
+filtered_functions = [function_name for function_name in all_functions if function_name.startswith(tuple(verbs_prefix))]
+with open(functions_list_file, 'w', encoding='utf-8') as f:
+    f.write('\n'.join(sorted(filtered_functions)))
