@@ -7,7 +7,7 @@ from ccxt.base.exchange import Exchange
 from ccxt.abstract.apex import ImplicitAPI
 import hashlib
 import math
-from ccxt.base.types import Account, Any, Balances, Currencies, Currency, Int, Market, Num, Order, OrderBook, OrderSide, OrderType, Str, Strings, Ticker, Tickers, Trade, MarketInterface, TransferEntry
+from ccxt.base.types import Account, Any, Balances, Currencies, Currency, Int, Market, Num, Order, OrderBook, OrderSide, OrderType, Position, Str, Strings, Ticker, Tickers, Trade, MarketInterface, TransferEntry
 from typing import List
 from ccxt.base.errors import ExchangeError
 from ccxt.base.errors import ArgumentsRequired
@@ -827,7 +827,7 @@ class apex(Exchange, ImplicitAPI):
 
     def parse_ohlcv(self, ohlcv, market: Market = None) -> list:
         #
-        # {
+        #  {
         #     "start": 1647511440000,
         #     "symbol": "BTC-USD",
         #     "interval": "1",
@@ -837,7 +837,7 @@ class apex(Exchange, ImplicitAPI):
         #     "close": "40000",
         #     "volume": "1.002",
         #     "turnover": "3"
-        # } {"s":"BTCUSDT","i":"1","t":1741265880000,"c":"90235","h":"90235","l":"90156","o":"90156","v":"0.052","tr":"4690.4466"}
+        #  } {"s":"BTCUSDT","i":"1","t":1741265880000,"c":"90235","h":"90235","l":"90156","o":"90156","v":"0.052","tr":"4690.4466"}
         #
         return [
             self.safe_integer_n(ohlcv, ['start', 't']),
@@ -1769,7 +1769,7 @@ class apex(Exchange, ImplicitAPI):
         data = self.safe_dict(response, 'data', {})
         return data
 
-    def fetch_positions(self, symbols: Strings = None, params={}):
+    def fetch_positions(self, symbols: Strings = None, params={}) -> List[Position]:
         """
         fetch all open positions
 

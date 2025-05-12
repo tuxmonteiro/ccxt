@@ -722,7 +722,7 @@ class bingx(Exchange, ImplicitAPI):
         #
         #    {
         #      "code": 0,
-        #      "timestamp": 1702623271477,
+        #      "timestamp": 1702623271476,
         #      "data": [
         #        {
         #          "coin": "BTC",
@@ -804,7 +804,7 @@ class bingx(Exchange, ImplicitAPI):
                     'limits': limits,
                 }
             active = depositEnabled or withdrawEnabled
-            result[code] = {
+            result[code] = self.safe_currency_structure({
                 'info': entry,
                 'code': code,
                 'id': currencyId,
@@ -816,7 +816,7 @@ class bingx(Exchange, ImplicitAPI):
                 'networks': networks,
                 'fee': fee,
                 'limits': defaultLimits,
-            }
+            })
         return result
 
     def fetch_spot_markets(self, params) -> List[Market]:
@@ -2371,7 +2371,7 @@ class bingx(Exchange, ImplicitAPI):
         positions = self.parse_positions(records)
         return self.filter_by_symbol_since_limit(positions, symbol, since, limit)
 
-    def fetch_positions(self, symbols: Strings = None, params={}):
+    def fetch_positions(self, symbols: Strings = None, params={}) -> List[Position]:
         """
         fetch all open positions
 
@@ -5535,7 +5535,7 @@ class bingx(Exchange, ImplicitAPI):
         :param str address: the address to withdraw to
         :param str [tag]:
         :param dict [params]: extra parameters specific to the exchange API endpoint
-        :param int [params.walletType]: 1 fund account, 2 standard account, 3 perpetual account
+        :param int [params.walletType]: 1 fund account, 2 standard account, 3 perpetual account, 15 spot account
         :returns dict: a `transaction structure <https://docs.ccxt.com/#/?id=transaction-structure>`
         """
         tag, params = self.handle_withdraw_tag_and_params(tag, params)
@@ -5545,8 +5545,6 @@ class bingx(Exchange, ImplicitAPI):
         walletType = self.safe_integer(params, 'walletType')
         if walletType is None:
             walletType = 1
-        if not self.in_array(walletType, [1, 2, 3]):
-            raise BadRequest(self.id + ' withdraw() requires either 1 fund account, 2 standard futures account, 3 perpetual account for walletType')
         request: dict = {
             'coin': currency['id'],
             'address': address,

@@ -709,7 +709,7 @@ public partial class bingx : Exchange
         //
         //    {
         //      "code": 0,
-        //      "timestamp": 1702623271477,
+        //      "timestamp": 1702623271476,
         //      "data": [
         //        {
         //          "coin": "BTC",
@@ -800,7 +800,7 @@ public partial class bingx : Exchange
                 };
             }
             object active = isTrue(depositEnabled) || isTrue(withdrawEnabled);
-            ((IDictionary<string,object>)result)[(string)code] = new Dictionary<string, object>() {
+            ((IDictionary<string,object>)result)[(string)code] = this.safeCurrencyStructure(new Dictionary<string, object>() {
                 { "info", entry },
                 { "code", code },
                 { "id", currencyId },
@@ -812,7 +812,7 @@ public partial class bingx : Exchange
                 { "networks", networks },
                 { "fee", fee },
                 { "limits", defaultLimits },
-            };
+            });
         }
         return result;
     }
@@ -5431,7 +5431,7 @@ public partial class bingx : Exchange
      * @param {string} address the address to withdraw to
      * @param {string} [tag]
      * @param {object} [params] extra parameters specific to the exchange API endpoint
-     * @param {int} [params.walletType] 1 fund account, 2 standard account, 3 perpetual account
+     * @param {int} [params.walletType] 1 fund account, 2 standard account, 3 perpetual account, 15 spot account
      * @returns {object} a [transaction structure]{@link https://docs.ccxt.com/#/?id=transaction-structure}
      */
     public async override Task<object> withdraw(object code, object amount, object address, object tag = null, object parameters = null)
@@ -5447,10 +5447,6 @@ public partial class bingx : Exchange
         if (isTrue(isEqual(walletType, null)))
         {
             walletType = 1;
-        }
-        if (!isTrue(this.inArray(walletType, new List<object>() {1, 2, 3})))
-        {
-            throw new BadRequest ((string)add(this.id, " withdraw() requires either 1 fund account, 2 standard futures account, 3 perpetual account for walletType")) ;
         }
         object request = new Dictionary<string, object>() {
             { "coin", getValue(currency, "id") },

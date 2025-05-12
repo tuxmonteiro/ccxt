@@ -91,10 +91,15 @@ import "github.com/ccxt/ccxt/go/v4"
             AppendToArray(&emptyAllowedFor,"optionType")
             AppendToArray(&emptyAllowedFor,"strike")
         }
+        if IsTrue(option) {
+            AppendToArray(&emptyAllowedFor,"linear")
+            AppendToArray(&emptyAllowedFor,"inverse")
+        }
         AssertStructure(exchange, skippedProperties, method, market, format, emptyAllowedFor)
         AssertSymbol(exchange, skippedProperties, method, market, "symbol")
         var logText interface{} = LogTemplate(exchange, method, market)
         // check taker/maker
+        // todo: check not all to be within 0-1.0
         AssertGreater(exchange, skippedProperties, method, market, "taker", "-100")
         AssertLess(exchange, skippedProperties, method, market, "taker", "100")
         AssertGreater(exchange, skippedProperties, method, market, "maker", "-100")

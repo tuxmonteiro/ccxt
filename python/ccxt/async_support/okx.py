@@ -4832,7 +4832,7 @@ class okx(Exchange, ImplicitAPI):
         :returns dict: an `address structure <https://docs.ccxt.com/#/?id=address-structure>`
         """
         await self.load_markets()
-        rawNetwork = self.safe_string_upper(params, 'network')
+        rawNetwork = self.safe_string(params, 'network')  # some networks are like "Dora Vota Mainnet"
         params = self.omit(params, 'network')
         code = self.safe_currency_code(code)
         network = self.network_id_to_code(rawNetwork, code)
@@ -5402,7 +5402,7 @@ class okx(Exchange, ImplicitAPI):
             return None
         return self.parse_position(position, market)
 
-    async def fetch_positions(self, symbols: Strings = None, params={}):
+    async def fetch_positions(self, symbols: Strings = None, params={}) -> List[Position]:
         """
 
         https://www.okx.com/docs-v5/en/#rest-api-account-get-positions

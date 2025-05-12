@@ -3,7 +3,7 @@ import { Precise } from './base/Precise.js';
 import Exchange from './abstract/apex.js';
 import { TICK_SIZE, TRUNCATE } from './base/functions/number.js';
 import { sha256 } from './static_dependencies/noble-hashes/sha256.js';
-import { MarketInterface, Account, Balances, Currencies, Currency, Dict, FundingRateHistory, Int, Market, Num, OHLCV, Order, OrderBook, OrderSide, OrderType, Str, Strings, Ticker, Tickers, Trade, TransferEntry, int } from './base/types';
+import { MarketInterface, Account, Balances, Currencies, Currency, Dict, FundingRateHistory, Int, Market, Num, OHLCV, Order, OrderBook, OrderSide, OrderType, Str, Strings, Ticker, Tickers, Trade, TransferEntry, Position, int } from './base/types';
 import { ArgumentsRequired, BadRequest, ExchangeError, InvalidOrder, RateLimitExceeded } from './base/errors.js';
 
 //  ---------------------------------------------------------------------------
@@ -838,7 +838,7 @@ export default class apex extends Exchange {
 
     parseOHLCV (ohlcv, market: Market = undefined): OHLCV {
         //
-        // {
+        //  {
         //     "start": 1647511440000,
         //     "symbol": "BTC-USD",
         //     "interval": "1",
@@ -848,7 +848,7 @@ export default class apex extends Exchange {
         //     "close": "40000",
         //     "volume": "1.002",
         //     "turnover": "3"
-        // } {"s":"BTCUSDT","i":"1","t":1741265880000,"c":"90235","h":"90235","l":"90156","o":"90156","v":"0.052","tr":"4690.4466"}
+        //  } {"s":"BTCUSDT","i":"1","t":1741265880000,"c":"90235","h":"90235","l":"90156","o":"90156","v":"0.052","tr":"4690.4466"}
         //
         return [
             this.safeIntegerN (ohlcv, [ 'start', 't' ]),
@@ -1866,7 +1866,7 @@ export default class apex extends Exchange {
      * @param {object} [params] extra parameters specific to the exchange API endpoint
      * @returns {object[]} a list of [position structure]{@link https://docs.ccxt.com/#/?id=position-structure}
      */
-    async fetchPositions (symbols: Strings = undefined, params = {}) {
+    async fetchPositions (symbols: Strings = undefined, params = {}): Promise<Position[]> {
         await this.loadMarkets ();
         const response = await this.privateGetV3Account (params);
         const data = this.safeDict (response, 'data', {});
