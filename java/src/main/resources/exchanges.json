@@ -1,442 +1,4 @@
 {
-    "ace": {
-        "alias": false,
-        "api": {
-            "private": {
-                "post": [
-                    "v2/coin/customerAccount",
-                    "v2/kline/getKline",
-                    "v2/order/order",
-                    "v2/order/cancel",
-                    "v2/order/getOrderList",
-                    "v2/order/showOrderStatus",
-                    "v2/order/showOrderHistory",
-                    "v2/order/getTradeList"
-                ]
-            },
-            "public": {
-                "get": [
-                    "oapi/v2/list/tradePrice",
-                    "oapi/v2/list/marketPair",
-                    "open/v2/public/getOrderBook"
-                ]
-            }
-        },
-        "certified": false,
-        "commonCurrencies": {
-            "BCHSV": "BSV",
-            "XBT": "BTC"
-        },
-        "countries": [
-            "TW"
-        ],
-        "currencies": {},
-        "dex": false,
-        "enableRateLimit": true,
-        "exceptions": {
-            "broad": {},
-            "exact": {
-                "10012": "AuthenticationError",
-                "2003": "InvalidOrder",
-                "2004": "InvalidOrder",
-                "2005": "InvalidOrder",
-                "20182": "AuthenticationError",
-                "20183": "InvalidOrder",
-                "2021": "InsufficientFunds",
-                "2036": "InvalidOrder",
-                "2039": "InvalidOrder",
-                "2053": "InvalidOrder",
-                "2061": "BadRequest",
-                "2063": "InvalidOrder",
-                "9996": "BadRequest"
-            }
-        },
-        "features": {
-            "future": {},
-            "spot": {
-                "createOrder": {
-                    "hedged": false,
-                    "iceberg": false,
-                    "leverage": false,
-                    "marginMode": false,
-                    "marketBuyByCost": false,
-                    "marketBuyRequiresPrice": false,
-                    "selfTradePrevention": false,
-                    "stopLossPrice": false,
-                    "takeProfitPrice": false,
-                    "timeInForce": {
-                        "FOK": false,
-                        "GTD": false,
-                        "IOC": false,
-                        "PO": false
-                    },
-                    "trailing": false,
-                    "triggerDirection": false,
-                    "triggerPrice": false
-                },
-                "fetchMyTrades": {
-                    "limit": 500,
-                    "marginMode": false,
-                    "symbolRequired": true
-                },
-                "fetchOHLCV": {
-                    "limit": 2000
-                },
-                "fetchOpenOrders": {
-                    "marginMode": false,
-                    "symbolRequired": false,
-                    "trailing": false,
-                    "trigger": false
-                },
-                "fetchOrder": {
-                    "marginMode": false,
-                    "symbolRequired": false,
-                    "trailing": false,
-                    "trigger": false
-                },
-                "sandbox": false
-            },
-            "swap": {}
-        },
-        "fees": {
-            "funding": {
-                "deposit": {},
-                "percentage": null,
-                "tierBased": null,
-                "withdraw": {}
-            },
-            "trading": {
-                "maker": "0.0005",
-                "percentage": true,
-                "taker": "0.001",
-                "tierBased": null
-            }
-        },
-        "has": {
-            "CORS": null,
-            "addMargin": false,
-            "borrowCrossMargin": false,
-            "borrowIsolatedMargin": false,
-            "borrowMargin": false,
-            "cancelAllOrders": false,
-            "cancelAllOrdersWs": null,
-            "cancelOrder": true,
-            "cancelOrderWs": null,
-            "cancelOrders": false,
-            "cancelOrdersWs": null,
-            "closeAllPositions": false,
-            "closePosition": false,
-            "createDepositAddress": null,
-            "createLimitBuyOrder": null,
-            "createLimitBuyOrderWs": null,
-            "createLimitOrder": true,
-            "createLimitOrderWs": null,
-            "createLimitSellOrder": null,
-            "createLimitSellOrderWs": null,
-            "createMarketBuyOrder": null,
-            "createMarketBuyOrderWithCost": null,
-            "createMarketBuyOrderWithCostWs": null,
-            "createMarketBuyOrderWs": null,
-            "createMarketOrder": true,
-            "createMarketOrderWithCost": null,
-            "createMarketOrderWithCostWs": null,
-            "createMarketOrderWs": true,
-            "createMarketSellOrder": null,
-            "createMarketSellOrderWithCost": null,
-            "createMarketSellOrderWithCostWs": null,
-            "createMarketSellOrderWs": null,
-            "createOrder": true,
-            "createOrderWithTakeProfitAndStopLoss": false,
-            "createOrderWithTakeProfitAndStopLossWs": false,
-            "createOrderWs": null,
-            "createOrders": null,
-            "createPostOnlyOrder": null,
-            "createPostOnlyOrderWs": null,
-            "createReduceOnlyOrder": false,
-            "createReduceOnlyOrderWs": null,
-            "createStopLimitOrder": null,
-            "createStopLimitOrderWs": null,
-            "createStopLossOrder": null,
-            "createStopLossOrderWs": null,
-            "createStopMarketOrder": null,
-            "createStopMarketOrderWs": null,
-            "createStopOrder": null,
-            "createStopOrderWs": null,
-            "createTakeProfitOrder": null,
-            "createTakeProfitOrderWs": null,
-            "createTrailingAmountOrder": null,
-            "createTrailingAmountOrderWs": null,
-            "createTrailingPercentOrder": null,
-            "createTrailingPercentOrderWs": null,
-            "createTriggerOrder": null,
-            "createTriggerOrderWs": null,
-            "deposit": null,
-            "editOrder": false,
-            "editOrderWs": null,
-            "editOrders": null,
-            "fetchAccounts": null,
-            "fetchBalance": true,
-            "fetchBalanceWs": null,
-            "fetchBidsAsks": null,
-            "fetchBorrowInterest": false,
-            "fetchBorrowRate": false,
-            "fetchBorrowRateHistories": false,
-            "fetchBorrowRateHistory": false,
-            "fetchBorrowRates": false,
-            "fetchBorrowRatesPerSymbol": false,
-            "fetchCanceledAndClosedOrders": null,
-            "fetchCanceledOrders": null,
-            "fetchClosedOrder": null,
-            "fetchClosedOrders": false,
-            "fetchClosedOrdersWs": null,
-            "fetchConvertCurrencies": null,
-            "fetchConvertQuote": null,
-            "fetchConvertTrade": null,
-            "fetchConvertTradeHistory": null,
-            "fetchCrossBorrowRate": false,
-            "fetchCrossBorrowRates": false,
-            "fetchCurrencies": false,
-            "fetchCurrenciesWs": "emulated",
-            "fetchDeposit": null,
-            "fetchDepositAddress": false,
-            "fetchDepositAddresses": null,
-            "fetchDepositAddressesByNetwork": null,
-            "fetchDepositWithdrawFee": null,
-            "fetchDepositWithdrawFees": null,
-            "fetchDeposits": false,
-            "fetchDepositsWithdrawals": null,
-            "fetchDepositsWs": null,
-            "fetchFundingHistory": false,
-            "fetchFundingInterval": false,
-            "fetchFundingIntervals": false,
-            "fetchFundingRate": false,
-            "fetchFundingRateHistory": false,
-            "fetchFundingRates": false,
-            "fetchGreeks": false,
-            "fetchIndexOHLCV": false,
-            "fetchIsolatedBorrowRate": false,
-            "fetchIsolatedBorrowRates": false,
-            "fetchIsolatedPositions": false,
-            "fetchL2OrderBook": true,
-            "fetchL3OrderBook": null,
-            "fetchLastPrices": null,
-            "fetchLedger": null,
-            "fetchLedgerEntry": null,
-            "fetchLeverage": false,
-            "fetchLeverageTiers": false,
-            "fetchLeverages": false,
-            "fetchLiquidations": false,
-            "fetchLongShortRatio": false,
-            "fetchLongShortRatioHistory": false,
-            "fetchMarginAdjustmentHistory": false,
-            "fetchMarginMode": false,
-            "fetchMarginModes": false,
-            "fetchMarkOHLCV": false,
-            "fetchMarkPrices": false,
-            "fetchMarketLeverageTiers": false,
-            "fetchMarkets": true,
-            "fetchMarketsWs": null,
-            "fetchMyLiquidations": false,
-            "fetchMySettlementHistory": false,
-            "fetchMyTrades": true,
-            "fetchMyTradesWs": null,
-            "fetchOHLCV": true,
-            "fetchOHLCVWs": null,
-            "fetchOpenInterest": false,
-            "fetchOpenInterestHistory": false,
-            "fetchOpenInterests": false,
-            "fetchOpenOrder": null,
-            "fetchOpenOrders": true,
-            "fetchOpenOrdersWs": null,
-            "fetchOption": false,
-            "fetchOptionChain": false,
-            "fetchOrder": true,
-            "fetchOrderBook": true,
-            "fetchOrderBookWs": null,
-            "fetchOrderBooks": null,
-            "fetchOrderTrades": true,
-            "fetchOrderWs": null,
-            "fetchOrders": false,
-            "fetchOrdersByStatus": null,
-            "fetchOrdersWs": null,
-            "fetchPosition": false,
-            "fetchPositionHistory": false,
-            "fetchPositionMode": false,
-            "fetchPositionWs": null,
-            "fetchPositions": false,
-            "fetchPositionsForSymbol": false,
-            "fetchPositionsForSymbolWs": null,
-            "fetchPositionsHistory": false,
-            "fetchPositionsRisk": false,
-            "fetchPositionsWs": null,
-            "fetchPremiumIndexOHLCV": false,
-            "fetchSettlementHistory": false,
-            "fetchStatus": null,
-            "fetchTicker": true,
-            "fetchTickerWs": null,
-            "fetchTickers": true,
-            "fetchTickersWs": null,
-            "fetchTime": false,
-            "fetchTrades": false,
-            "fetchTradesWs": null,
-            "fetchTradingFee": false,
-            "fetchTradingFees": false,
-            "fetchTradingFeesWs": null,
-            "fetchTradingLimits": null,
-            "fetchTransactionFee": null,
-            "fetchTransactionFees": false,
-            "fetchTransactions": false,
-            "fetchTransfer": false,
-            "fetchTransfers": false,
-            "fetchUnderlyingAssets": null,
-            "fetchVolatilityHistory": false,
-            "fetchWithdrawAddresses": null,
-            "fetchWithdrawal": false,
-            "fetchWithdrawalWhitelist": null,
-            "fetchWithdrawals": false,
-            "fetchWithdrawalsWs": null,
-            "future": false,
-            "margin": false,
-            "option": false,
-            "privateAPI": true,
-            "publicAPI": true,
-            "reduceMargin": false,
-            "repayCrossMargin": false,
-            "repayIsolatedMargin": false,
-            "sandbox": null,
-            "setLeverage": false,
-            "setMargin": false,
-            "setMarginMode": false,
-            "setPositionMode": false,
-            "signIn": null,
-            "spot": true,
-            "swap": false,
-            "transfer": false,
-            "watchBalance": null,
-            "watchBidsAsks": null,
-            "watchLiquidations": null,
-            "watchLiquidationsForSymbols": null,
-            "watchMyLiquidations": null,
-            "watchMyLiquidationsForSymbols": null,
-            "watchMyTrades": null,
-            "watchOHLCV": null,
-            "watchOHLCVForSymbols": null,
-            "watchOrderBook": null,
-            "watchOrderBookForSymbols": null,
-            "watchOrders": null,
-            "watchOrdersForSymbols": null,
-            "watchPosition": null,
-            "watchPositions": null,
-            "watchStatus": null,
-            "watchTicker": null,
-            "watchTickers": null,
-            "watchTrades": null,
-            "watchTradesForSymbols": null,
-            "withdraw": false,
-            "ws": false
-        },
-        "httpExceptions": {
-            "400": "ExchangeNotAvailable",
-            "401": "AuthenticationError",
-            "403": "ExchangeNotAvailable",
-            "404": "ExchangeNotAvailable",
-            "405": "ExchangeNotAvailable",
-            "407": "AuthenticationError",
-            "408": "RequestTimeout",
-            "409": "ExchangeNotAvailable",
-            "410": "ExchangeNotAvailable",
-            "418": "DDoSProtection",
-            "422": "ExchangeError",
-            "429": "RateLimitExceeded",
-            "451": "ExchangeNotAvailable",
-            "500": "ExchangeNotAvailable",
-            "501": "ExchangeNotAvailable",
-            "502": "ExchangeNotAvailable",
-            "503": "ExchangeNotAvailable",
-            "504": "RequestTimeout",
-            "511": "AuthenticationError",
-            "520": "ExchangeNotAvailable",
-            "521": "ExchangeNotAvailable",
-            "522": "ExchangeNotAvailable",
-            "525": "ExchangeNotAvailable",
-            "526": "ExchangeNotAvailable",
-            "530": "ExchangeNotAvailable"
-        },
-        "id": "ace",
-        "limits": {
-            "amount": {
-                "max": null,
-                "min": null
-            },
-            "cost": {
-                "max": null,
-                "min": null
-            },
-            "leverage": {
-                "max": null,
-                "min": null
-            },
-            "price": {
-                "max": null,
-                "min": null
-            }
-        },
-        "markets": {},
-        "name": "ACE",
-        "options": {
-            "brokerId": "ccxt"
-        },
-        "paddingMode": 5,
-        "precisionMode": 4,
-        "pro": false,
-        "rateLimit": 100,
-        "requiredCredentials": {
-            "accountId": false,
-            "apiKey": true,
-            "login": false,
-            "password": false,
-            "privateKey": false,
-            "secret": true,
-            "token": false,
-            "twofa": false,
-            "uid": false,
-            "walletAddress": false
-        },
-        "status": {
-            "eta": null,
-            "status": "ok",
-            "updated": null,
-            "url": null
-        },
-        "timeframes": {
-            "10m": 10,
-            "12h": 720,
-            "1M": 31,
-            "1d": 24,
-            "1h": 60,
-            "1m": 1,
-            "1w": 70,
-            "2h": 120,
-            "30m": 10,
-            "4h": 240,
-            "5m": 5,
-            "8h": 480
-        },
-        "timeout": 10000,
-        "urls": {
-            "api": {
-                "private": "https://ace.io/polarisex/open",
-                "public": "https://ace.io/polarisex"
-            },
-            "doc": [
-                "https://github.com/ace-exchange/ace-offical-api-docs"
-            ],
-            "fees": "https://helpcenter.ace.io/hc/zh-tw/articles/360018609132-%E8%B2%BB%E7%8E%87%E8%AA%AA%E6%98%8E",
-            "logo": "https://github.com/user-attachments/assets/115f1e4a-0fd0-4b76-85d5-a49ebf64d1c8",
-            "www": "https://ace.io/"
-        },
-        "version": "v2"
-    },
     "alpaca": {
         "alias": false,
         "api": {
@@ -8424,6 +7986,7 @@
             },
             "liquidationsLimit": 1000,
             "listenKeyRefreshRate": 1200000,
+            "loadAllOptions": false,
             "myLiquidationsLimit": 1000,
             "networks": {
                 "BEP2": "BNB",
@@ -8613,12 +8176,12 @@
                 "ws": {
                     "delivery": "wss://dstream.binancefuture.com/ws",
                     "future": "wss://fstream.binancefuture.com/ws",
-                    "margin": "wss://testnet.binance.vision/ws",
-                    "spot": "wss://testnet.binance.vision/ws",
+                    "margin": "wss://stream.testnet.binance.vision/ws",
+                    "spot": "wss://stream.testnet.binance.vision/ws",
                     "ws-api": {
                         "delivery": "wss://testnet.binancefuture.com/ws-dapi/v1",
                         "future": "wss://testnet.binancefuture.com/ws-fapi/v1",
-                        "spot": "wss://testnet.binance.vision/ws-api/v3"
+                        "spot": "wss://ws-api.testnet.binance.vision/ws-api/v3"
                     }
                 }
             },
@@ -15528,7 +15091,7 @@
                     "untilDays": 90
                 },
                 "fetchOHLCV": {
-                    "limit": 1000
+                    "limit": 200
                 },
                 "fetchOpenOrders": {
                     "limit": 100,
@@ -16412,27 +15975,40 @@
                 "swap"
             ],
             "fetchOHLCV": {
-                "maxDaysPerTimeframe": {
-                    "10m": 30,
-                    "12h": 360,
-                    "15m": 52,
-                    "1M": 300,
-                    "1d": 300,
-                    "1h": 83,
+                "maxRecentDaysPerTimeframe": {
+                    "12h": 720,
+                    "15m": 30,
+                    "1M": 43200,
+                    "1d": 1440,
+                    "1h": 60,
                     "1m": 30,
-                    "1w": 300,
-                    "2h": 120,
-                    "30m": 62,
-                    "3d": 300,
+                    "1w": 10080,
+                    "30m": 30,
+                    "3d": 4320,
                     "3m": 30,
                     "4h": 240,
                     "5m": 30,
                     "6h": 360
                 },
                 "spot": {
+                    "maxLimitPerTimeframe": {
+                        "1M": 100,
+                        "1d": 300,
+                        "1w": 100,
+                        "3d": 100
+                    },
                     "method": "publicSpotGetV2SpotMarketCandles"
                 },
                 "swap": {
+                    "maxLimitPerTimeframe": {
+                        "12h": 180,
+                        "1M": 4,
+                        "1d": 90,
+                        "1w": 13,
+                        "3d": 30,
+                        "4h": 540,
+                        "6h": 360
+                    },
                     "method": "publicMixGetV2MixMarketCandles"
                 }
             },
@@ -16447,6 +16023,26 @@
                     "method": "publicMixGetV2MixMarketFillsHistory"
                 }
             },
+            "fiatCurrencies": [
+                "EUR",
+                "VND",
+                "PLN",
+                "CZK",
+                "HUF",
+                "DKK",
+                "AUD",
+                "CAD",
+                "NOK",
+                "SEK",
+                "CHF",
+                "MXN",
+                "COP",
+                "ARS",
+                "GBP",
+                "BRL",
+                "UAH",
+                "ZAR"
+            ],
             "networks": {
                 "ABBC": "ABBCCoin",
                 "ACA": "AcalaToken",
@@ -17318,6 +16914,7 @@
                     "contract/private/order-history": 10,
                     "contract/private/position": 10,
                     "contract/private/position-risk": 10,
+                    "contract/private/position-v2": 10,
                     "contract/private/trades": 10,
                     "contract/private/transaction-history": 10,
                     "spot/v1/broker/rebate": 1,
@@ -20475,6 +20072,9 @@
         "markets": {},
         "name": "BitoPro",
         "options": {
+            "fiatCurrencies": [
+                "TWD"
+            ],
             "networks": {
                 "BEP20": "BSC",
                 "BSC": "BSC",
@@ -24826,6 +24426,9 @@
             "BITVAVO-ACCESS-WINDOW": 10000,
             "OHLCVLimit": 1000,
             "currencyToPrecisionRoundingMode": "0",
+            "fiatCurrencies": [
+                "EUR"
+            ],
             "networks": {
                 "ERC20": "ETH",
                 "TRC20": "TRX"
@@ -27128,7 +26731,7 @@
                     "symbolRequired": false
                 },
                 "fetchOHLCV": {
-                    "max": 720
+                    "limit": 720
                 },
                 "fetchOpenOrders": {
                     "limit": 2000,
@@ -30734,9 +30337,6 @@
                 }
             },
             "createMarketBuyOrderRequiresPrice": false,
-            "createOrder": {
-                "method": "privatePostV5OrderCreate"
-            },
             "createUnifiedMarginAccount": false,
             "defaultNetwork": "ERC20",
             "defaultNetworks": {
@@ -32603,8 +32203,11 @@
                     "symbols = this.symbols;",
                     "}",
                     "const name = 'ticker_batch';",
-                    "const tickers = await this.subscribe (name, false, symbols, params);",
+                    "const ticker = await this.subscribeMultiple (name, false, symbols, params);",
                     "if (this.newUpdates) {",
+                    "const tickers = {};",
+                    "const symbol = ticker['symbol'];",
+                    "tickers[symbol] = ticker;",
                     "return tickers;",
                     "}",
                     "return this.tickers;",
@@ -35746,7 +35349,7 @@
             "fetchDepositAddresses": null,
             "fetchDepositAddressesByNetwork": null,
             "fetchDepositWithdrawFee": null,
-            "fetchDepositWithdrawFees": null,
+            "fetchDepositWithdrawFees": true,
             "fetchDeposits": true,
             "fetchDepositsWithdrawals": false,
             "fetchDepositsWs": null,
@@ -56404,6 +56007,7 @@
                 "useHistoricalEndpointForSpot": true
             },
             "fetchOrdersByStatesMethod": "spot_private_get_v1_order_orders",
+            "include_OS_certificates": false,
             "language": "en-US",
             "networks": {
                 "AAC": "AAC",
@@ -58108,7 +57712,11 @@
                     "await this.loadMarkets ();",
                     "const [ order, globalParams ] = this.parseCreateEditOrderArgs (undefined, symbol, type, side, amount, price, params);",
                     "const orders = await this.createOrdersWs ([ order as any ], globalParams);",
-                    "return orders[0];",
+                    "const parsedOrder = orders[0];",
+                    "const orderInfo = this.safeDict (parsedOrder, 'info');",
+                    "// handle potential error here",
+                    "this.handleErrors (undefined, undefined, undefined, undefined, undefined, this.json (orderInfo), orderInfo, undefined, undefined);",
+                    "return parsedOrder;",
                     "}"
                 ],
                 "request_template": {}
@@ -58179,7 +57787,11 @@
                     "const dataObject = this.safeDict (responseObject, 'data', {});",
                     "const statuses = this.safeList (dataObject, 'statuses', []);",
                     "const first = this.safeDict (statuses, 0, {});",
-                    "return this.parseOrder (first, market);",
+                    "const parsedOrder = this.parseOrder (first, market);",
+                    "const orderInfo = this.safeDict (parsedOrder, 'info');",
+                    "// handle potential error here",
+                    "this.handleErrors (undefined, undefined, undefined, undefined, undefined, this.json (orderInfo), orderInfo, undefined, undefined);",
+                    "return parsedOrder;",
                     "}"
                 ],
                 "request_template": {}
@@ -77378,7 +76990,7 @@
             "fetchFundingHistory": true,
             "fetchFundingInterval": null,
             "fetchFundingIntervals": null,
-            "fetchFundingRate": "emulated",
+            "fetchFundingRate": true,
             "fetchFundingRateHistory": true,
             "fetchFundingRates": true,
             "fetchGreeks": null,
@@ -84759,6 +84371,32 @@
                 ],
                 "request_template": {}
             },
+            "upbit.watchOHLCV": {
+                "comments": [
+                    "/**",
+                    "* @name upbit#watchOHLCV",
+                    "* @description watches information an OHLCV with timestamp, openingPrice, highPrice, lowPrice, tradePrice, baseVolume in 1s.",
+                    "* @see https://docs.upbit.com/kr/reference/websocket-candle for Upbit KR",
+                    "* @see https://global-docs.upbit.com/reference/websocket-candle for Upbit Global",
+                    "* @param {string} symbol unified market symbol of the market orders were made in",
+                    "* @param {string} timeframe specifies the OHLCV candle interval to watch. As of now, Upbit only supports 1s candles.",
+                    "* @param {int} [since] the earliest time in ms to fetch orders for",
+                    "* @param {int} [limit] the maximum number of order structures to retrieve",
+                    "* @param {object} [params] extra parameters specific to the exchange API endpoint",
+                    "* @returns {OHLCV[]} a list of [OHLCV structures]{@link https://docs.ccxt.com/#/?id=ohlcv-structure}",
+                    "*/"
+                ],
+                "raw": [
+                    "async watchOHLCV (symbol: string, timeframe = '1s', since: Int = undefined, limit: Int = undefined, params = {}): Promise<OHLCV[]> {",
+                    "if (timeframe !== '1s') {",
+                    "throw new NotSupported (this.id + ' watchOHLCV does not support' + timeframe + ' candle.');",
+                    "}",
+                    "const timeFrameOHLCV = 'candle.' + timeframe;",
+                    "return await this.watchPublic (symbol, timeFrameOHLCV);",
+                    "}"
+                ],
+                "request_template": {}
+            },
             "upbit.watchOrderBook": {
                 "comments": [
                     "/**",
@@ -84984,7 +84622,7 @@
             "createTriggerOrder": null,
             "createTriggerOrderWs": null,
             "deposit": null,
-            "editOrder": "emulated",
+            "editOrder": true,
             "editOrderWs": null,
             "editOrders": null,
             "fetchAccounts": null,
@@ -85132,7 +84770,7 @@
             "watchMyLiquidations": null,
             "watchMyLiquidationsForSymbols": null,
             "watchMyTrades": true,
-            "watchOHLCV": null,
+            "watchOHLCV": true,
             "watchOHLCVForSymbols": null,
             "watchOrderBook": true,
             "watchOrderBookForSymbols": null,
