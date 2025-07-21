@@ -1412,8 +1412,7 @@ public partial class bybit : ccxt.bybit
         await this.loadMarkets();
         if (isTrue(!isEqual(symbol, null)))
         {
-            symbol = this.symbol(symbol);
-            subHash = add(subHash, add(":", symbol));
+            throw new NotSupported ((string)add(this.id, " unWatchMyTrades() does not support a symbol parameter, you must unwatch all my trades")) ;
         }
         object url = await this.getUrlByMarketType(symbol, true, method, parameters);
         await this.authenticate(url);
@@ -1916,8 +1915,7 @@ public partial class bybit : ccxt.bybit
         object subHash = "orders";
         if (isTrue(!isEqual(symbol, null)))
         {
-            symbol = this.symbol(symbol);
-            subHash = add(subHash, add(":", symbol));
+            throw new NotSupported ((string)add(this.id, " unWatchOrders() does not support a symbol parameter, you must unwatch all orders")) ;
         }
         object url = await this.getUrlByMarketType(symbol, true, method, parameters);
         await this.authenticate(url);
@@ -2745,7 +2743,8 @@ public partial class bybit : ccxt.bybit
                 {
                     object unsubHash = getValue(messageHashes, j);
                     object subHash = getValue(subMessageHashes, j);
-                    this.cleanUnsubscription(client as WebSocketClient, subHash, unsubHash);
+                    object usePrefix = isTrue((isEqual(subHash, "orders"))) || isTrue((isEqual(subHash, "myTrades")));
+                    this.cleanUnsubscription(client as WebSocketClient, subHash, unsubHash, usePrefix);
                 }
                 this.cleanCache(subscription);
             }

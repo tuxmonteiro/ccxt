@@ -2,7 +2,7 @@
 
 # -----------------------------------------------------------------------------
 
-__version__ = '4.4.91'
+__version__ = '4.4.95'
 
 # -----------------------------------------------------------------------------
 
@@ -231,6 +231,8 @@ class Exchange(BaseExchange):
                     self.last_json_response = json_response
                 if self.verbose:
                     self.log("\nfetch Response:", self.id, method, url, http_status_code, "ResponseHeaders:", headers, "ResponseBody:", http_response)
+                if json_response and not isinstance(json_response, list) and self.returnResponseHeaders:
+                    json_response['responseHeaders'] = headers
                 self.logger.debug("%s %s, Response: %s %s %s", method, url, http_status_code, headers, http_response)
 
         except socket.gaierror as e:
@@ -1572,6 +1574,9 @@ class Exchange(BaseExchange):
 
     async def fetch_greeks(self, symbol: str, params={}):
         raise NotSupported(self.id + ' fetchGreeks() is not supported yet')
+
+    async def fetch_all_greeks(self, symbols: Strings = None, params={}):
+        raise NotSupported(self.id + ' fetchAllGreeks() is not supported yet')
 
     async def fetch_option_chain(self, code: str, params={}):
         raise NotSupported(self.id + ' fetchOptionChain() is not supported yet')
